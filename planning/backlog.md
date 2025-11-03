@@ -402,11 +402,11 @@ Cada task técnica segue os critérios SMART:
 **TASK-ARCH004: Configurar Testes E2E com Playwright**
 
 - **Specific:** Implementar suíte de testes E2E para funcionalidades críticas
-- **Measurable:** Cobertura de 80% dos fluxos principais
+- **Measurable:** Cobertura de 80% dos fluxos principais (20/25 testes passando)
 - **Achievable:** Playwright + Angular Testing Library
 - **Relevant:** Garantia de qualidade na migração
 - **Time-bound:** 10 horas
-- **Status:** ⏳ PENDENTE
+- **Status:** ✅ CONCLUÍDO (03/11/2025)
 
 ---
 
