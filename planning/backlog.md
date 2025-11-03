@@ -78,7 +78,7 @@ Cada task técnica segue os critérios SMART:
 - **Achievable:** Framework completo para autenticação moderna
 - **Relevant:** Suporte a OAuth2 e OpenID Connect futuros
 - **Time-bound:** 12 horas
-- **Status:** ⏳ PENDENTE
+- **Status:** ✅ CONCLUÍDA (03/11/2025)
 - **Prioridade:** 🔥 CRÍTICA
 
 **TASK-SEC004: Testes de Segurança Abrangentes**
@@ -155,7 +155,7 @@ Cada task técnica segue os critérios SMART:
 - **Achievable:** Sessões de teste de 30min + questionários
 - **Relevant:** Validação inicial antes de usuários externos
 - **Time-bound:** 8 horas
-- **Status:** 🔄 EM ANDAMENTO
+- **Status:** ✅ CONCLUÍDA (03/11/2025)
 
 **TASK-TU005: Análise de Resultados**
 

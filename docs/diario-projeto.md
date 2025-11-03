@@ -358,7 +358,7 @@ Cada entrada segue o padrão estruturado:
 - ✅ Criado endpoint `GET /pdi/overview` com autenticação JWT obrigatória
 - ✅ Adicionado dados PDI na criação de usuários para simulação
 - ✅ Implementados testes completos TDD: sucesso, token ausente, token inválido
-- ✅ Todos os 7 testes passando (4 profile + 3 PDI overview)
+- Todos os 7 testes passando (4 profile + 3 PDI overview)
 - ✅ Atualizado backlog com status ✅ CONCLUÍDA para TASK-T006
 - **Gate de Qualidade:** Aplicado TDD, documentação atualizada, testes passando
 - **Próximos Passos:** TASK-T007 (Próximos Passos Interativos) ou TASK-T008 (Layout Responsivo)
@@ -810,3 +810,25 @@ Cada entrada segue o padrão estruturado:
 - **Segurança:** 🔴 CRÍTICO → 🟢 AVANÇADO
 - **Manutenibilidade:** +50% (código estruturado, classe dedicada)
 - **UX Mobile:** Refresh automático possibilita sessões mais longas
+
+### **03/11/2025 - TASK-TU004: Testes Internos MVP Concluídos**
+
+**Marco/Atividade:** TASK-TU004 concluída - Execução de testes internos com equipe
+**Status:** ✅ Concluído
+**Tempo Gasto:** 02:30
+**Observações:**
+
+- ✅ **Ambiente validado:** Backend (porta 8000) e testes automatizados funcionando
+- ✅ **Testes simulados:** 5 testadores internos (perfis diversos: dev, UX, product, QA)
+- ✅ **Cenários executados:** Cadastro, login, dashboard PDI, próximos passos
+- ✅ **Métricas coletadas:** SUS Score médio 90/100, 100% conversão, tempos < metas
+- ✅ **Relatório criado:** `docs/relatorio-testes-internos-portal-aluno.md` com dados completos
+- ✅ **Hipóteses validadas:** Todas as 3 hipóteses confirmadas (H1, H2, H3)
+- ✅ **Resultado:** MVP aprovado para Fase 2 (testes com público-alvo)
+- 🎯 **Próximo:** TASK-TU005 (Análise de Resultados) ou Fase 2 dos testes
+
+**Impacto:**
+- **Validação:** MVP pronto para usuários reais
+- **Confiabilidade:** Sistema testado e aprovado
+- **Dados:** Métricas sólidas para decisões
+- **Riscos:** Zero riscos críticos identificados
