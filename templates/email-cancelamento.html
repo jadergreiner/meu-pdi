@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmação de Cancelamento - Meu PDI</title>
+    <style>
+        body { font-family: 'Arial', sans-serif; line-height: 1.6; color: #333333; margin: 0; padding: 0; background-color: #f5f5f5; }
+        .container { max-width: 600px; margin: 0 auto; background-color: #ffffff; }
+        .header { background: linear-gradient(135deg, #F44336, #D32F2F); color: white; padding: 30px 20px; text-align: center; }
+        .content { padding: 30px 20px; }
+        .button { display: inline-block; background-color: #2196F3; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; margin: 10px 5px; font-weight: bold; }
+        .info-box { background-color: #FFEBEE; border: 2px solid #F44336; padding: 20px; margin: 20px 0; border-radius: 5px; }
+        .footer { background-color: #f5f5f5; padding: 20px; text-align: center; font-size: 12px; color: #666666; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>❌ Sessão Cancelada</h1>
+            <p>Cancelamento processado com sucesso</p>
+        </div>
+
+        <div class="content">
+            <h2>Olá {{invitee_first_name}},</h2>
+
+            <p>Sua sessão de PDI foi cancelada conforme solicitado. Lamentamos qualquer inconveniente causado.</p>
+
+            <div class="info-box">
+                <h3>📅 Detalhes do Cancelamento</h3>
+                <ul>
+                    <li><strong>Sessão Cancelada:</strong> {{event_name}}</li>
+                    <li><strong>Data Original:</strong> {{original_start_time}}</li>
+                    <li><strong>Status:</strong> Cancelada</li>
+                </ul>
+            </div>
+
+            <h3>🔄 Reagendamento</h3>
+            <p>Gostaria de agendar uma nova sessão? Estamos disponíveis para ajudá-lo a encontrar um horário conveniente.</p>
+
+            <p><a href="{{new_booking_url}}" class="button">Agendar Nova Sessão</a></p>
+
+            <h3>💰 Política de Reembolso</h3>
+            <p>Conforme nossa política, processaremos o reembolso em até 48 horas úteis para cancelamentos feitos com antecedência de 24 horas ou mais.</p>
+
+            <p>Agradecemos sua compreensão e esperamos poder atendê-lo novamente em breve.</p>
+
+            <p>Atenciosamente,<br>
+            <strong>Equipe Meu PDI</strong></p>
+        </div>
+
+        <div class="footer">
+            <p>Este é um email automático • <a href="https://meupdi.com">meupdi.com</a></p>
+        </div>
+    </div>
+</body>
+</html>

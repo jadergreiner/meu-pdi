@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lembrete: Sessão PDI Amanhã - Meu PDI</title>
+    <style>
+        body { font-family: 'Arial', sans-serif; line-height: 1.6; color: #333333; margin: 0; padding: 0; background-color: #f5f5f5; }
+        .container { max-width: 600px; margin: 0 auto; background-color: #ffffff; }
+        .header { background: linear-gradient(135deg, #FF9800, #F57C00); color: white; padding: 30px 20px; text-align: center; }
+        .content { padding: 30px 20px; }
+        .button { display: inline-block; background-color: #2196F3; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; margin: 10px 5px; font-weight: bold; }
+        .urgent-box { background-color: #FFF3E0; border: 2px solid #FF9800; padding: 20px; margin: 20px 0; border-radius: 5px; }
+        .footer { background-color: #f5f5f5; padding: 20px; text-align: center; font-size: 12px; color: #666666; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⏰ Lembrete: Sua Sessão é Amanhã!</h1>
+            <p>Preparação final para sua jornada de desenvolvimento</p>
+        </div>
+
+        <div class="content">
+            <h2>Olá {{invitee_first_name}},</h2>
+
+            <p>Este é um lembrete amigável: sua sessão de PDI está agendada para <strong>amanhã</strong>!</p>
+
+            <div class="urgent-box">
+                <h3>📅 Detalhes da Sessão</h3>
+                <ul>
+                    <li><strong>Data e Horário:</strong> {{start_time}} (amanhã)</li>
+                    <li><strong>Duração:</strong> {{event_duration}} minutos</li>
+                    <li><strong>Link da Reunião:</strong> <a href="{{zoom_link}}">{{zoom_link}}</a></li>
+                </ul>
+            </div>
+
+            <h3>🎯 Preparação Sugerida</h3>
+            <p>Para aproveitar ao máximo a sessão:</p>
+            <ul>
+                <li>✅ Teste sua câmera e microfone hoje</li>
+                <li>✅ Prepare 2-3 objetivos que gostaria de discutir</li>
+                <li>✅ Tenha papel e caneta para anotações</li>
+                <li>✅ Garanta um local tranquilo e sem interrupções</li>
+                <li>✅ Esteja 5 minutos adiantado</li>
+            </ul>
+
+            <h3>❓ Dúvidas Frequentes</h3>
+            <ul>
+                <li><strong>Posso reagendar?</strong> Sim, até 12h antes da sessão</li>
+                <li><strong>E se eu me atrasar?</strong> A sessão começará no horário marcado</li>
+                <li><strong>Como acessar o Zoom?</strong> Use o link enviado no email de confirmação</li>
+            </ul>
+
+            <p>
+                <a href="{{zoom_link}}" class="button">Testar Link da Reunião</a>
+                <a href="{{reschedule_url}}" class="button">Reagendar se Necessário</a>
+            </p>
+
+            <p>Estamos ansiosos para nossa conversa amanhã!</p>
+
+            <p>Atenciosamente,<br>
+            <strong>Equipe Meu PDI</strong></p>
+        </div>
+
+        <div class="footer">
+            <p>Este é um email automático • <a href="https://meupdi.com">meupdi.com</a></p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,14 @@
+# Dependencias do Backend - Portal do Aluno
+# TASK-T001: Formulario de Cadastro Otimizado
+
+fastapi==0.115.6
+uvicorn[standard]==0.32.1
+pydantic==2.10.3
+email-validator==2.2.0
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+
+# Desenvolvimento
+pytest==7.4.3
+httpx==0.25.2
+faker==20.1.0

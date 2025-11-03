@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmação de Agendamento - Meu PDI</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333333;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+        }
+        .header {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        .content {
+            padding: 30px 20px;
+        }
+        .button {
+            display: inline-block;
+            background-color: #2196F3;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px 5px;
+            font-weight: bold;
+        }
+        .button-secondary {
+            background-color: #FF9800;
+        }
+        .details-box {
+            background-color: #f9f9f9;
+            border-left: 4px solid #4CAF50;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .footer {
+            background-color: #f5f5f5;
+            padding: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #666666;
+        }
+        .highlight {
+            background-color: #FFF9C4;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>✅ Agendamento Confirmado!</h1>
+            <p>Sua jornada de desenvolvimento pessoal começa agora</p>
+        </div>
+
+        <div class="content">
+            <h2>Olá {{invitee_first_name}},</h2>
+
+            <p>Estamos muito felizes com seu agendamento! Sua sessão de PDI foi confirmada e estamos preparados para apoiá-lo nessa importante jornada de desenvolvimento pessoal.</p>
+
+            <div class="details-box">
+                <h3>📅 Detalhes da Sessão</h3>
+                <ul>
+                    <li><strong>Data e Horário:</strong> <span class="highlight">{{start_time}}</span></li>
+                    <li><strong>Duração:</strong> {{event_duration}} minutos</li>
+                    <li><strong>Tipo de Sessão:</strong> {{event_name}}</li>
+                    <li><strong>Formato:</strong> Online via Zoom</li>
+                </ul>
+            </div>
+
+            <h3>🎯 Seus Objetivos</h3>
+            <p>{{objective_response}}</p>
+
+            <h3>🔗 Links Importantes</h3>
+            <p>
+                <a href="{{zoom_link}}" class="button">Acessar Reunião Zoom</a>
+                <a href="{{reschedule_url}}" class="button button-secondary">Reagendar</a>
+                <a href="{{cancel_url}}" class="button button-secondary">Cancelar</a>
+            </p>
+
+            <h3>📋 O que Esperar da Sessão</h3>
+            <p>Na sua primeira sessão, vamos:</p>
+            <ul>
+                <li>✅ Mapear sua situação atual profissional</li>
+                <li>✅ Identificar pontos fortes e áreas de desenvolvimento</li>
+                <li>✅ Definir objetivos claros e SMART</li>
+                <li>✅ Criar um plano de ação inicial</li>
+                <li>✅ Estabelecer próximos passos</li>
+            </ul>
+
+            <div style="background-color: #E8F5E8; padding: 15px; border-radius: 5px; margin: 20px 0;">
+                <h4>💡 Dica Importante</h4>
+                <p>Prepare-se refletindo sobre: suas conquistas recentes, desafios atuais, e o que você gostaria de alcançar nos próximos 6-12 meses.</p>
+            </div>
+
+            <p><strong>Lembrete:</strong> Chegue 5 minutos antes do horário marcado. Teste sua câmera e microfone com antecedência.</p>
+
+            <p>Qualquer dúvida, estamos aqui para ajudar!</p>
+
+            <p>Atenciosamente,<br>
+            <strong>Equipe Meu PDI</strong><br>
+            suporte@meupdi.com<br>
+            www.meupdi.com</p>
+        </div>
+
+        <div class="footer">
+            <p>Este email foi enviado automaticamente. Não responda diretamente a este email.</p>
+            <p>© 2025 Meu PDI - Todos os direitos reservados</p>
+        </div>
+    </div>
+</body>
+</html>

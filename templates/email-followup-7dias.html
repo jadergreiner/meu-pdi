@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Como Está Seu Progresso? - Meu PDI</title>
+    <style>
+        body { font-family: 'Arial', sans-serif; line-height: 1.6; color: #333333; margin: 0; padding: 0; background-color: #f5f5f5; }
+        .container { max-width: 600px; margin: 0 auto; background-color: #ffffff; }
+        .header { background: linear-gradient(135deg, #9C27B0, #7B1FA2); color: white; padding: 30px 20px; text-align: center; }
+        .content { padding: 30px 20px; }
+        .button { display: inline-block; background-color: #2196F3; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; margin: 10px 5px; font-weight: bold; }
+        .progress-box { background-color: #F3E5F5; border: 2px solid #9C27B0; padding: 20px; margin: 20px 0; border-radius: 5px; }
+        .footer { background-color: #f5f5f5; padding: 20px; text-align: center; font-size: 12px; color: #666666; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📈 Como Está Seu Progresso?</h1>
+            <p>Uma semana após nossa sessão</p>
+        </div>
+
+        <div class="content">
+            <h2>Olá {{invitee_first_name}},</h2>
+
+            <p>Já se passou uma semana desde nossa sessão de PDI. Como você está se sentindo em relação aos objetivos que definimos?</p>
+
+            <div class="progress-box">
+                <h3>🎯 Checklist de Progresso</h3>
+                <ul>
+                    <li>✅ Implementei pelo menos uma ação do plano?</li>
+                    <li>✅ Revisitei os objetivos definidos?</li>
+                    <li>✅ Identifiquei novos desafios ou oportunidades?</li>
+                    <li>✅ Mantive registro das atividades?</li>
+                </ul>
+            </div>
+
+            <h3>💬 Vamos Conversar Sobre Seu Progresso?</h3>
+            <p>Gostaria de agendar uma sessão de acompanhamento para avaliar o que foi implementado e ajustar o plano se necessário?</p>
+
+            <p><a href="{{progress_check_booking_url}}" class="button">Agendar Sessão de Acompanhamento</a></p>
+
+            <h3>📚 Recursos Úteis</h3>
+            <ul>
+                <li><a href="https://meupdi.com/blog/dicas-desenvolvimento-pessoal">Dicas de Desenvolvimento Pessoal</a></li>
+                <li><a href="https://meupdi.com/ferramentas-pdi">Ferramentas para PDI</a></li>
+                <li><a href="https://meupdi.com/comunidade">Comunidade Meu PDI</a></li>
+            </ul>
+
+            <p>Continue firme na sua jornada! Pequenos passos consistentes geram grandes resultados.</p>
+
+            <p>Atenciosamente,<br>
+            <strong>Equipe Meu PDI</strong></p>
+        </div>
+
+        <div class="footer">
+            <p>Este é um email automático • <a href="https://meupdi.com">meupdi.com</a></p>
+        </div>
+    </div>
+</body>
+</html>
