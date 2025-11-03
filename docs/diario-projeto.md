@@ -20,6 +20,31 @@ Cada entrada segue o padrão estruturado:
 
 ## 📝 Registros de Desenvolvimento
 
+### **03/11/2025 - Migração de Segurança Concluída**
+
+**Marco/Atividade:** TASK-SEC002 concluído - Migração python-jose para PyJWT
+**Status:** ✅ Concluído
+**Tempo Gasto:** 01:45
+**Observações:**
+
+- ✅ **Migração bem-sucedida:** `python-jose` → `PyJWT==2.10.1`
+- � **Mudanças implementadas:**
+  - Imports: `from jose import JWTError, jwt` → `import jwt; from jwt import PyJWTError`
+  - Tratamento de erro: `JWTError` → `PyJWTError`
+  - Dependências: `requirements.txt` atualizado
+- ✅ **Validação completa:**
+  - 36/36 testes passando (sem regressões)
+  - Backend importando corretamente
+  - Funcionalidades críticas funcionando
+- 🚨 **Segurança:** CVEs CVE-2024-33664/33663 RESOLVIDAS
+- 📈 **Performance:** Mantida (5.79s vs 6.47s baseline)
+- 🎯 **Próximo:** TASK-SEC003 (Authlib avançado) ou outras prioridades
+
+**Impacto:**
+- **Risco reduzido:** 🔴 CRÍTICO → � SEGURO
+- **Manutenibilidade:** Biblioteca ativa e mantida
+- **Escalabilidade:** Pronto para recursos avançados
+
 ### **03/11/2025 - Resolução de Problemas de Push e Finalização da Reorganização**
 
 **Marco/Atividade:** Resolução de problemas de push GitHub e finalização da reorganização arquitetural

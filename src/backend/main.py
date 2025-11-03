@@ -11,7 +11,8 @@ import uuid
 from datetime import datetime, timedelta, timezone
 from passlib.context import CryptContext
 import bcrypt
-from jose import JWTError, jwt
+import jwt
+from jwt import PyJWTError
 
 app = FastAPI(title="Meu PDI - Portal do Aluno", version="1.0.0")
 
@@ -504,7 +505,7 @@ async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(s
                 status_code=status.HTTP_401_UNAUTHORIZED,
                 detail="Token invalido - user_id nao encontrado"
             )
-    except JWTError:
+    except PyJWTError:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Token invalido ou expirado"
