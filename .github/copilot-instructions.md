@@ -339,6 +339,14 @@ Limite: Apenas documentos relacionados
 Formato: Descricao detalhada e analise geral do projeto
 ```
 
+```
+Contexto: Executar a proxima task priorizada
+Repositorio: jadergreiner/meu-pdi
+Objetivo: Executar a task e atualizar as documentacoes relacionadas e/ou impactadas
+Limite: Apenas funcao principal e essenciais para o funcionamento
+Formato: INICIO: Mostra a Task que sera executada FIM: Relatório do processo
+```
+
 **Exemplo Ruim (Evitar):**
 ```
 Me fale tudo sobre autenticacao, liste todos os arquivos,
