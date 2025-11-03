@@ -20,6 +20,38 @@ Cada entrada segue o padrão estruturado:
 
 ## 📝 Registros de Desenvolvimento
 
+### **03/11/2025 - TASK-ARCH002 Concluída: Migração Componentes Core Auth**
+
+**Marco/Atividade:** TASK-ARCH002 concluído - Migração componentes login/register Next.js → Angular
+**Status:** ✅ Concluído
+**Tempo Gasto:** 02:30
+**Observações:**
+
+- ✅ **Migração bem-sucedida:** Componentes Next.js migrados para Angular 18
+- 🔧 **Mudanças implementadas:**
+  - **Login Component:** Reactive Forms, validação email/senha, integração AuthService
+  - **Register Component:** Form multi-campo com validação senha/confirm, termos de uso
+  - **UI/UX:** Angular Material, design responsivo, estados loading/error
+  - **Arquitetura:** Módulo Auth separado, rotas configuradas, dependências injetadas
+- ✅ **Funcionalidades mantidas:**
+  - Validação de formulários completa
+  - Estados de loading e tratamento de erros
+  - Navegação automática pós-login/register
+  - Links entre login/register
+- ✅ **Qualidade assegurada:**
+  - Build Angular bem-sucedido
+  - TypeScript strict mode
+  - Padrões Reactive Forms aplicados
+  - Estilos SCSS responsivos
+- 🎯 **Próximo:** TASK-ARCH003 (Dashboard components) ou outras prioridades Épico 2
+
+**Impacto:**
+
+- **Arquitetura:** ✅ Enterprise-ready (Angular 18 + modular)
+- **Manutenibilidade:** Código TypeScript tipado e testável
+- **Escalabilidade:** Pronto para expansão de funcionalidades auth
+- **Experiência:** UI consistente e moderna
+
 ### **03/11/2025 - Migração de Segurança Concluída**
 
 **Marco/Atividade:** TASK-SEC002 concluído - Migração python-jose para PyJWT
