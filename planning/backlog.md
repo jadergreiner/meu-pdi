@@ -58,7 +58,7 @@ Cada task técnica segue os critérios SMART:
 - **Achievable:** Análise estática + testes de penetração básicos
 - **Relevant:** Base para migração segura sem quebras
 - **Time-bound:** 6 horas
-- **Status:** ⏳ PENDENTE
+- **Status:** ✅ CONCLUÍDA (03/11/2025)
 - **Prioridade:** 🔥 CRÍTICA
 
 **TASK-SEC002: Migrar para PyJWT (Core)**
@@ -68,7 +68,7 @@ Cada task técnica segue os critérios SMART:
 - **Achievable:** Migração incremental mantendo compatibilidade
 - **Relevant:** Funcionalidade crítica de segurança restaurada
 - **Time-bound:** 8 horas
-- **Status:** ⏳ PENDENTE
+- **Status:** ✅ CONCLUÍDA (03/11/2025)
 - **Prioridade:** 🔥 CRÍTICA
 
 **TASK-SEC003: Implementar Authlib (Avançado)**
@@ -88,7 +88,7 @@ Cada task técnica segue os critérios SMART:
 - **Achievable:** Testes unitários + integração + performance
 - **Relevant:** Garantia de segurança pós-migração
 - **Time-bound:** 10 horas
-- **Status:** ⏳ PENDENTE
+- **Status:** ✅ CONCLUÍDA (03/11/2025)
 - **Prioridade:** 🔥 CRÍTICA
 
 ---

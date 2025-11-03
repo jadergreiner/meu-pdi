@@ -13,6 +13,9 @@ from passlib.context import CryptContext
 import bcrypt
 import jwt
 from jwt import PyJWTError
+from authlib.jose import jwt as authlib_jwt, JWTClaims
+from authlib.jose import JsonWebKey
+import secrets
 
 app = FastAPI(title="Meu PDI - Portal do Aluno", version="1.0.0")
 
@@ -29,6 +32,11 @@ app.add_middleware(
 SECRET_KEY = "your-secret-key-here-change-in-production"  # TODO: Mover para variáveis de ambiente
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
+REFRESH_TOKEN_EXPIRE_DAYS = 7
+
+# Configurações Authlib JWT
+JWT_PRIVATE_KEY = secrets.token_urlsafe(32)  # Chave privada para JWS
+JWT_PUBLIC_KEY = JWT_PRIVATE_KEY  # Para HS256, chave simétrica
 
 # Contexto para hash de senhas
 pwd_context = CryptContext(
@@ -40,6 +48,73 @@ pwd_context = CryptContext(
 
 # Bearer token security
 security = HTTPBearer()
+
+# JWT Helper Class com Authlib
+class JWTManager:
+    """Gerenciador JWT usando Authlib para recursos avançados"""
+
+    def __init__(self):
+        self.private_key = JWT_PRIVATE_KEY
+        self.public_key = JWT_PUBLIC_KEY
+        self.algorithm = ALGORITHM
+
+    def create_access_token(self, data: dict, expires_delta: Optional[timedelta] = None) -> str:
+        """Cria token JWT de acesso usando Authlib"""
+        to_encode = data.copy()
+        if expires_delta:
+            expire = datetime.now(timezone.utc) + expires_delta
+        else:
+            expire = datetime.now(timezone.utc) + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+
+        to_encode.update({
+            "exp": expire,
+            "iat": datetime.now(timezone.utc),
+            "type": "access"
+        })
+
+        header = {"alg": self.algorithm, "typ": "JWT"}
+        token = authlib_jwt.encode(header, to_encode, self.private_key)
+        return token.decode('utf-8') if isinstance(token, bytes) else token
+
+    def create_refresh_token(self, data: dict) -> str:
+        """Cria token JWT de refresh usando Authlib"""
+        to_encode = data.copy()
+        expire = datetime.now(timezone.utc) + timedelta(days=REFRESH_TOKEN_EXPIRE_DAYS)
+
+        to_encode.update({
+            "exp": expire,
+            "iat": datetime.now(timezone.utc),
+            "type": "refresh"
+        })
+
+        header = {"alg": self.algorithm, "typ": "JWT"}
+        token = authlib_jwt.encode(header, to_encode, self.private_key)
+        return token.decode('utf-8') if isinstance(token, bytes) else token
+
+    def decode_token(self, token: str) -> dict:
+        """Decodifica e valida token JWT usando Authlib"""
+        try:
+            claims = authlib_jwt.decode(token, self.public_key)
+            claims.validate()
+            return claims
+        except Exception as e:
+            raise PyJWTError(f"Token inválido: {str(e)}")
+
+    def verify_token_type(self, claims: dict, expected_type: str) -> bool:
+        """Verifica se o token é do tipo esperado"""
+        return claims.get("type") == expected_type
+
+# Instância global do gerenciador JWT
+jwt_manager = JWTManager()
+
+# Funções globais para compatibilidade
+def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
+    """Cria token JWT de acesso usando Authlib"""
+    return jwt_manager.create_access_token(data, expires_delta)
+
+def create_refresh_token(data: dict):
+    """Cria token JWT de refresh usando Authlib"""
+    return jwt_manager.create_refresh_token(data)
 
 # Modelos Pydantic para validacao
 class UserRegister(BaseModel):
@@ -89,6 +164,7 @@ class UserLogin(BaseModel):
 
 class TokenResponse(BaseModel):
     access_token: str
+    refresh_token: str
     token_type: str
     user: dict
 
@@ -339,17 +415,9 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
     hashed_bytes = hashed_password.encode('utf-8')
     return bcrypt.checkpw(password_bytes, hashed_bytes)
 
-def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
-    """Cria token JWT de acesso"""
-    to_encode = data.copy()
-    if expires_delta:
-        expire = datetime.now(timezone.utc) + expires_delta
-    else:
-        expire = datetime.now(timezone.utc) + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
-
-    to_encode.update({"exp": expire})
-    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
-    return encoded_jwt
+def create_refresh_token(data: dict):
+    """Cria token JWT de refresh usando Authlib"""
+    return jwt_manager.create_refresh_token(data)
 
 def authenticate_user(email: str, password: str):
     """Autentica usuário por email e senha"""
@@ -474,6 +542,11 @@ async def login_user(user_credentials: UserLogin):
         expires_delta=access_token_expires
     )
 
+    # Criar token de refresh
+    refresh_token = create_refresh_token(
+        data={"sub": user["id"], "email": user["email"]}
+    )
+
     # Preparar dados do usuário para resposta (sem senha)
     user_response = {
         "id": user["id"],
@@ -485,9 +558,82 @@ async def login_user(user_credentials: UserLogin):
 
     return TokenResponse(
         access_token=access_token,
+        refresh_token=refresh_token,
         token_type="bearer",
         user=user_response
     )
+
+class RefreshTokenRequest(BaseModel):
+    refresh_token: str
+
+@app.post("/refresh", response_model=TokenResponse)
+async def refresh_access_token(request: RefreshTokenRequest):
+    """
+    Endpoint para renovar token de acesso usando refresh token.
+
+    Recebe refresh token e retorna novo par access/refresh token.
+    """
+    try:
+        # Decodificar e validar refresh token
+        claims = jwt_manager.decode_token(request.refresh_token)
+
+        # Verificar se é um token de refresh
+        if not jwt_manager.verify_token_type(claims, "refresh"):
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Token inválido - tipo incorreto"
+            )
+
+        user_id = claims.get("sub")
+        user_email = claims.get("email")
+
+        if not user_id or not user_email:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Token inválido - dados ausentes"
+            )
+
+        # Verificar se usuário ainda existe
+        if user_id not in usuarios_db:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="Usuário não encontrado"
+            )
+
+        user = usuarios_db[user_id]
+
+        # Criar novos tokens
+        access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+        new_access_token = create_access_token(
+            data={"sub": user_id, "email": user_email},
+            expires_delta=access_token_expires
+        )
+
+        new_refresh_token = create_refresh_token(
+            data={"sub": user_id, "email": user_email}
+        )
+
+        # Preparar dados do usuário para resposta
+        user_response = {
+            "id": user_id,
+            "nome_completo": user["nome_completo"],
+            "email": user["email"],
+            "email_validado": user["email_validado"],
+            "data_cadastro": user["data_cadastro"]
+        }
+
+        return TokenResponse(
+            access_token=new_access_token,
+            refresh_token=new_refresh_token,
+            token_type="bearer",
+            user=user_response
+        )
+
+    except PyJWTError:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Refresh token inválido ou expirado"
+        )
 
 @app.get("/health")
 async def health_check():
@@ -496,10 +642,18 @@ async def health_check():
 
 # TASK-T005: Perfil do Usuário Completo
 async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(security)):
-    """Obtem o usuario atual a partir do token JWT"""
+    """Obtem o usuario atual a partir do token JWT usando Authlib"""
     try:
-        payload = jwt.decode(credentials.credentials, SECRET_KEY, algorithms=[ALGORITHM])
-        user_id: str = payload.get("sub")
+        claims = jwt_manager.decode_token(credentials.credentials)
+
+        # Verificar se é um token de acesso
+        if not jwt_manager.verify_token_type(claims, "access"):
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Token inválido - tipo incorreto"
+            )
+
+        user_id: str = claims.get("sub")
         if user_id is None:
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
