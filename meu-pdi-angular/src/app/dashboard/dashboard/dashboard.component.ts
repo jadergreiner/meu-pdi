@@ -72,11 +72,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.isLoading.set(true);
     this.error.set(null);
 
-    // TASK-ARCH003: Migrar Dashboard PDI - Carregamento de dados implementado
+    // TASK-014: Implementar Dashboard PDI Funcional - URLs corrigidas para endpoints reais
     forkJoin({
-      profile: this.http.get<UserProfile>('/api/profile'),
+      profile: this.http.get<UserProfile>('/api/users/profile'),
       pdiOverview: this.http.get<PDIOverview>('/api/pdi/overview'),
-      nextSteps: this.http.get<{ acoes_recomendadas: NextStep[] }>('/api/next-steps')
+      nextSteps: this.http.get<{ acoes_recomendadas: NextStep[] }>('/api/pdi/next-steps')
     }).pipe(
       takeUntil(this.destroy$)
     ).subscribe({
@@ -87,8 +87,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.isLoading.set(false);
       },
       error: (err) => {
-        console.error('Dashboard error:', err);
-        this.error.set('Erro ao carregar dados do dashboard');
+        console.error('Dashboard error:', err.error || err.message || err);
+        this.error.set('Erro ao carregar dados do dashboard. Tente novamente.');
         this.isLoading.set(false);
       }
     });

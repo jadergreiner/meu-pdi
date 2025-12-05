@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
 
       const { email, password } = this.loginForm.value;
 
-      this.authService.login({ email, password }).subscribe({
+      this.authService.login({ email, senha: password }).subscribe({
         next: (response) => {
           this.isLoading = false;
           // TASK-ARCH002: Migrar Componentes Core Auth - Login implementado
@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
         },
         error: (error) => {
           this.isLoading = false;
-          this.errorMessage = error.error?.message || 'Erro ao fazer login. Tente novamente.';
+          this.errorMessage = error.error?.detail || error.error?.message || 'Erro ao fazer login. Tente novamente.';
         }
       });
     } else {

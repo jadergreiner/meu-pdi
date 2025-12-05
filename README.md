@@ -14,7 +14,7 @@ Plataforma e serviço de mentoria para Plano de Desenvolvimento Individual (PDI)
 ### 🏗️ Arquitetura Atual
 
 - **Frontend:** Next.js 14 + TypeScript + Tailwind CSS
-- **Backend:** FastAPI + PostgreSQL (planejado)
+- **Backend:** FastAPI + PostgreSQL (✅ implementado)
 - **Padrões:** App Router, TypeScript strict, utility-first CSS
 
 ### 🏗️ Arquitetura Futura (Migrações Planejadas)
@@ -32,11 +32,14 @@ Plataforma e serviço de mentoria para Plano de Desenvolvimento Individual (PDI)
 - ✅ **Backlog Reorganizado:** 4 épicos com prioridades claras (Segurança → Validação → Arquitetura → Evolução)
 - ✅ **Épico 0 (Segurança):** CVEs críticas identificadas - migração python-jose → PyJWT/Authlib
 - ✅ **Épico 1 (Validação):** MVP validado com sucesso - pronto para Fase 2 (TASK-TU005 ✅)
-- ✅ **Épico 2 (Arquitetura):** Setup Angular enterprise concluído (TASK-ARCH001 ✅) + Componentes Auth migrados (TASK-ARCH002 ✅) + Dashboard PDI migrado (TASK-ARCH003 ✅)
-- ✅ **Gate de Qualidade:** EPIC/SPIN/SMART aplicado com sucesso
+- ✅ **Épico 2 (Arquitetura):** Setup Angular enterprise concluído (TASK-ARCH001 ✅) + Componentes Auth migrados (TASK-ARCH002 ✅) + Dashboard PDI migrado (TASK-ARCH003 ✅) + Testes E2E Dashboard implementados (TASK-ARCH005 ✅) + Estatísticas do Usuário integradas (TASK-DASH001 ✅)
+- ✅ **Backend FastAPI:** Setup completo (TASK-010 ✅) + Imports modulares corrigidos (TASK-011 ✅) + Sistema de autenticação JWT funcional (TASK-012 ✅) + Integração Frontend Angular (TASK-013 ✅) + Dashboard PDI Funcional (TASK-014 ✅)
+- ✅ **Gate de Qualidade:** EPIC/SPIN/SMART/TDD aplicado com sucesso
 - ✅ **Lições Aprendidas:** Sistema implementado para aprendizado contínuo
 - ✅ **Portal do Aluno:** MVP completo e validado - pronto para testes de usuário
 - ✅ **Sistema de Bugs:** BUG-001, BUG-002, BUG-003 resolvidos com rastreamento profissional
+- ✅ **Pagamentos:** TASK-004 concluída (preparação técnica completa)
+- ✅ **Webhooks de Pagamento:** TASK-005 concluída (processamento automático Stripe/PagSeguro)
 - 🔄 **Sprint Atual:** Fase 2 - Preparação para Testes com Público-Alvo Real
 - 🎯 **Próximo Épico:** Épico 0 - Segurança Crítica (4 tasks pendentes)
 
@@ -52,7 +55,9 @@ Plataforma e serviço de mentoria para Plano de Desenvolvimento Individual (PDI)
 - ✅ **Componentes Auth Angular:** Login/Register com Reactive Forms + validação completa
 - ✅ **Testes TDD Backend:** Estrutura pytest criada (testes falhando - esperado)
 - ✅ **Portal do Aluno:** Autenticação completa + Dashboard PDI responsivo (TASK-T001 a T008)
+- ✅ **Estatísticas do Usuário:** Dashboard com métricas visuais de engajamento (TASK-STATS001 + TASK-DASH001)
 - ✅ **Testes de Usuário:** Framework completo SUS + plano de testes estruturado
+- ✅ **Webhooks de Pagamento:** Sistema completo para processamento automático de pagamentos + warnings de depreciação resolvidos
 
 
 
@@ -85,12 +90,13 @@ Para executar o projeto localmente e validar todas as funcionalidades implementa
 - ✅ Comandos de desenvolvimento
 
 
-### �🚀 Próximos Passos
+### 🚀 Próximos Passos
 
-1. **Sprint Atual:** Testes de Usuário - Análise de Resultados (TASK-TU005)
-2. **Sprint 1-2:** Foundation + Portal Aluno Básico
-3. **Sprint 3-4:** Portal Mentor Core
-4. **Sprint 5-6:** Portal Gestor + Integração
+1. **TASK-005:** Webhooks de Pagamento ✅ CONCLUÍDA
+2. **Sprint Atual:** Épico 3 - Monetização (TASK-006: Templates de Recibo)
+3. **Sprint 1-2:** Foundation + Portal Aluno Básico
+4. **Sprint 3-4:** Portal Mentor Core
+5. **Sprint 5-6:** Portal Gestor + Integração
 
 
 ### 📁 Estrutura do Projeto
@@ -135,5 +141,5 @@ python scripts/start_test_servers.py  # Inicia backend + frontend simultaneament
 
 ---
 
-**Última Atualização:** 03 de novembro de 2025
+**Última Atualização:** 04 de novembro de 2025
 **Contato:** jadergreiner (GitHub)

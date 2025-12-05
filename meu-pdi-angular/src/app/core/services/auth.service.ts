@@ -6,15 +6,17 @@ import { tap } from 'rxjs/operators';
 
 export interface User {
   id: string;
+  nome_completo: string;
   email: string;
-  name: string;
-  role: 'user' | 'admin';
+  email_validado: boolean;
+  data_cadastro: string;
 }
 
 export interface AuthResponse {
+  access_token: string;
+  refresh_token: string;
+  token_type: string;
   user: User;
-  token: string;
-  refreshToken: string;
 }
 
 @Injectable({
@@ -48,24 +50,24 @@ export class AuthService {
     return false;
   }
 
-  login(credentials: { email: string; password: string }): Observable<AuthResponse> {
+  login(credentials: { email: string; senha: string }): Observable<AuthResponse> {
     return this.http.post<AuthResponse>('/api/auth/login', credentials).pipe(
       tap(response => {
         if (isPlatformBrowser(this.platformId)) {
-          localStorage.setItem('auth_token', response.token);
-          localStorage.setItem('refresh_token', response.refreshToken);
+          localStorage.setItem('auth_token', response.access_token);
+          localStorage.setItem('refresh_token', response.refresh_token);
         }
         this.currentUserSubject.next(response.user);
       })
     );
   }
 
-  register(userData: { name: string; email: string; password: string }): Observable<AuthResponse> {
+  register(userData: { nome_completo: string; email: string; senha: string; confirmar_senha: string; aceitar_termos: boolean }): Observable<AuthResponse> {
     return this.http.post<AuthResponse>('/api/auth/register', userData).pipe(
       tap(response => {
         if (isPlatformBrowser(this.platformId)) {
-          localStorage.setItem('auth_token', response.token);
-          localStorage.setItem('refresh_token', response.refreshToken);
+          localStorage.setItem('auth_token', response.access_token);
+          localStorage.setItem('refresh_token', response.refresh_token);
         }
         this.currentUserSubject.next(response.user);
       })
@@ -80,20 +82,28 @@ export class AuthService {
     this.currentUserSubject.next(null);
   }
 
-  refreshToken(): Observable<{ token: string }> {
+  refreshToken(): Observable<{ access_token: string; token_type: string }> {
     if (!isPlatformBrowser(this.platformId)) {
       throw new Error('Cannot refresh token on server side');
     }
 
     const refreshToken = localStorage.getItem('refresh_token');
-    return this.http.post<{ token: string }>('/api/auth/refresh', { refreshToken }).pipe(
+    return this.http.post<{ access_token: string; token_type: string }>('/api/auth/refresh', { refresh_token: refreshToken }).pipe(
       tap(response => {
-        localStorage.setItem('auth_token', response.token);
+        localStorage.setItem('auth_token', response.access_token);
       })
     );
   }
 
-  isAdmin(): boolean {
-    return this.currentUser?.role === 'admin';
+  forgotPassword(email: string): Observable<{ message: string }> {
+    return this.http.post<{ message: string }>('/api/auth/reset-password', { email });
+  }
+
+  resetPassword(token: string, newPassword: string): Observable<{ message: string }> {
+    return this.http.post<{ message: string }>('/api/auth/confirm-reset-password', {
+      token,
+      nova_senha: newPassword,
+      confirmar_senha: newPassword
+    });
   }
 }

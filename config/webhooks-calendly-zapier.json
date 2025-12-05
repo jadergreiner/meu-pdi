@@ -1,0 +1,88 @@
+{
+  "metadata": {
+    "task": "TASK-002",
+    "description": "Implementar Webhooks Calendly → Zapier",
+    "created_date": "2025-11-03",
+    "status": "in_execution"
+  },
+  "calendly": {
+    "webhook_url": "https://hooks.zapier.com/hooks/catch/XXXXXXX/YYYYYYY/",
+    "events": [
+      "invitee.created",
+      "invitee.canceled"
+    ],
+    "event_types": [
+      "Sessão PDI Individual - 60min",
+      "Pacote PDI 5 Sessões - 60min cada"
+    ]
+  },
+  "zapier": {
+    "zap_name": "Calendly → Notion + Gmail (PDI)",
+    "trigger": "Webhooks by Zapier - Catch Hook",
+    "actions": [
+      "Notion - Create Database Item",
+      "Gmail - Send Email"
+    ]
+  },
+  "notion": {
+    "database_id": "",
+    "database_name": "Sessões PDI",
+    "fields": [
+      "Nome Completo",
+      "Email",
+      "Data da Sessão",
+      "Tipo de Sessão",
+      "Duração",
+      "Objetivo Principal",
+      "Experiência Anterior",
+      "Status",
+      "URL Reagendamento",
+      "URL Cancelamento",
+      "Data Criação"
+    ]
+  },
+  "gmail": {
+    "email_subject": "✅ Confirmação de Agendamento - Sessão PDI",
+    "email_from": "contato@meupdi.com"
+  },
+  "implementation_status": {
+    "calendly_webhook": "pending",
+    "zapier_zap": "pending",
+    "notion_connection": "pending",
+    "gmail_connection": "pending",
+    "testing": "pending",
+    "documentation": "pending"
+  },
+  "test_logs": [
+    {
+      "date": "2025-11-03",
+      "test_type": "webhook_creation",
+      "status": "pending",
+      "notes": "Aguardando configuração no Calendly"
+    },
+    {
+      "date": "2025-11-03 20:49:28",
+      "test_type": "webhook_url_test",
+      "status": "failed",
+      "notes": ""
+    },
+    {
+      "date": "2025-11-03 20:49:28",
+      "test_type": "payload_test",
+      "status": "failed",
+      "notes": ""
+    },
+    {
+      "date": "2025-11-03 20:50:53",
+      "test_type": "webhook_url_test",
+      "status": "failed",
+      "notes": ""
+    },
+    {
+      "date": "2025-11-03 20:50:53",
+      "test_type": "payload_test",
+      "status": "failed",
+      "notes": ""
+    }
+  ]
+}

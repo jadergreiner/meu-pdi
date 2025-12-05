@@ -1,0 +1,270 @@
+// Container principal
+.statistics-container {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+// Header
+.statistics-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+  gap: 16px;
+
+  .statistics-title {
+    font-size: 28px;
+    font-weight: 500;
+    color: #333;
+    margin: 0;
+  }
+
+  .engagement-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 500;
+    font-size: 14px;
+
+    &.alto {
+      background-color: #e8f5e8;
+      color: #2e7d32;
+    }
+
+    &.medio {
+      background-color: #fff3e0;
+      color: #f57c00;
+    }
+
+    &.baixo {
+      background-color: #ffebee;
+      color: #c62828;
+    }
+
+    .engagement-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
+
+// Grid de estatísticas
+.statistics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+// Cards de estatísticas
+.stat-card {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  border-radius: 12px;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  }
+
+  .stat-content {
+    display: flex;
+    align-items: center;
+    padding: 24px;
+    gap: 20px;
+  }
+
+  .stat-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    background-color: rgba(0, 0, 0, 0.04);
+
+    mat-icon {
+      font-size: 28px;
+      width: 28px;
+      height: 28px;
+    }
+  }
+
+  .stat-info {
+    flex: 1;
+
+    .stat-value {
+      font-size: 32px;
+      font-weight: 600;
+      color: #333;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 14px;
+      color: #666;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .progress-mini {
+      margin-top: 8px;
+      height: 4px;
+      border-radius: 2px;
+    }
+  }
+}
+
+// Última atividade
+.last-activity {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 24px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border-left: 4px solid #007bff;
+
+  .activity-icon {
+    color: #007bff;
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+  }
+
+  .activity-text {
+    font-size: 14px;
+    color: #555;
+    font-weight: 500;
+  }
+}
+
+// Estados de loading e erro
+.loading-container,
+.error-container,
+.empty-state {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+  padding: 24px;
+}
+
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+
+  .loading-text {
+    color: #666;
+    font-size: 16px;
+    margin: 0;
+  }
+}
+
+.error-content,
+.empty-state {
+  text-align: center;
+  max-width: 400px;
+
+  .error-icon,
+  .empty-icon {
+    font-size: 64px;
+    width: 64px;
+    height: 64px;
+    color: #ccc;
+    margin-bottom: 16px;
+  }
+
+  .error-title,
+  .empty-title {
+    font-size: 20px;
+    font-weight: 500;
+    color: #333;
+    margin: 0 0 8px 0;
+  }
+
+  .error-message,
+  .empty-message {
+    color: #666;
+    font-size: 14px;
+    margin: 0 0 24px 0;
+    line-height: 1.5;
+  }
+}
+
+// Responsividade
+@media (max-width: 768px) {
+  .statistics-container {
+    padding: 16px;
+  }
+
+  .statistics-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+
+    .statistics-title {
+      font-size: 24px;
+    }
+  }
+
+  .statistics-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .stat-card .stat-content {
+    padding: 20px;
+    gap: 16px;
+  }
+
+  .stat-card .stat-icon {
+    width: 50px;
+    height: 50px;
+
+    mat-icon {
+      font-size: 24px;
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  .stat-card .stat-info .stat-value {
+    font-size: 28px;
+  }
+
+  .last-activity {
+    padding: 12px 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+
+    .activity-text {
+      font-size: 13px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .statistics-header .statistics-title {
+    font-size: 20px;
+  }
+
+  .stat-card .stat-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+  }
+
+  .stat-card .stat-info .stat-value {
+    font-size: 24px;
+  }
+}
