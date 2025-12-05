@@ -1,0 +1,6 @@
+# Dependências de teste para TDD
+pytest==7.4.3
+pytest-asyncio==0.21.1
+httpx==0.25.2
+freezegun==1.2.2
+faker==20.1.0

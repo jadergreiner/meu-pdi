@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lembrete: Sessão PDI em 1 Hora - Meu PDI</title>
+    <style>
+        body { font-family: 'Arial', sans-serif; line-height: 1.6; color: #333333; margin: 0; padding: 0; background-color: #f5f5f5; }
+        .container { max-width: 600px; margin: 0 auto; background-color: #ffffff; }
+        .header { background: linear-gradient(135deg, #FF5722, #D84315); color: white; padding: 30px 20px; text-align: center; }
+        .content { padding: 30px 20px; }
+        .button { display: inline-block; background-color: #2196F3; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; margin: 10px 5px; font-weight: bold; }
+        .urgent-box { background-color: #FFEBEE; border: 2px solid #FF5722; padding: 20px; margin: 20px 0; border-radius: 5px; }
+        .footer { background-color: #f5f5f5; padding: 20px; text-align: center; font-size: 12px; color: #666666; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚨 Sua Sessão Começa em 1 Hora!</h1>
+            <p>Último lembrete antes da sessão</p>
+        </div>
+
+        <div class="content">
+            <h2>Olá {{invitee_first_name}},</h2>
+
+            <p>Sua sessão de PDI começa em <strong>1 hora</strong>! Este é o último lembrete antes da reunião.</p>
+
+            <div class="urgent-box">
+                <h3>⏰ Detalhes da Sessão</h3>
+                <ul>
+                    <li><strong>Data e Horário:</strong> {{start_time}} (em 1 hora)</li>
+                    <li><strong>Duração:</strong> {{event_duration}} minutos</li>
+                    <li><strong>Link da Reunião:</strong> <a href="{{zoom_link}}">{{zoom_link}}</a></li>
+                </ul>
+            </div>
+
+            <h3>🎯 Preparação Final</h3>
+            <ul>
+                <li>✅ Teste câmera e microfone agora</li>
+                <li>✅ Tenha água e bloco de notas próximos</li>
+                <li>✅ Entre na reunião 5 minutos adiantado</li>
+                <li>✅ Garanta conexão estável com internet</li>
+            </ul>
+
+            <p><a href="{{zoom_link}}" class="button">Entrar na Reunião Agora</a></p>
+
+            <p>Estamos ansiosos para nossa sessão!</p>
+
+            <p>Atenciosamente,<br>
+            <strong>Equipe Meu PDI</strong></p>
+        </div>
+
+        <div class="footer">
+            <p>Este é um email automático • <a href="https://meupdi.com">meupdi.com</a></p>
+        </div>
+    </div>
+</body>
+</html>

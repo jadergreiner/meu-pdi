@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmação de Reagendamento - Meu PDI</title>
+    <style>
+        body { font-family: 'Arial', sans-serif; line-height: 1.6; color: #333333; margin: 0; padding: 0; background-color: #f5f5f5; }
+        .container { max-width: 600px; margin: 0 auto; background-color: #ffffff; }
+        .header { background: linear-gradient(135deg, #FF9800, #F57C00); color: white; padding: 30px 20px; text-align: center; }
+        .content { padding: 30px 20px; }
+        .button { display: inline-block; background-color: #2196F3; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; margin: 10px 5px; font-weight: bold; }
+        .details-box { background-color: #FFF3E0; border: 2px solid #FF9800; padding: 20px; margin: 20px 0; border-radius: 5px; }
+        .footer { background-color: #f5f5f5; padding: 20px; text-align: center; font-size: 12px; color: #666666; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔄 Reagendamento Confirmado</h1>
+            <p>Nova data e horário agendados</p>
+        </div>
+
+        <div class="content">
+            <h2>Olá {{invitee_first_name}},</h2>
+
+            <p>Seu reagendamento foi confirmado com sucesso! Agradecemos por nos informar sobre a mudança de disponibilidade.</p>
+
+            <div class="details-box">
+                <h3>📅 Novos Detalhes da Sessão</h3>
+                <ul>
+                    <li><strong>Nova Data e Horário:</strong> {{new_start_time}}</li>
+                    <li><strong>Duração:</strong> {{event_duration}} minutos</li>
+                    <li><strong>Tipo de Sessão:</strong> {{event_name}}</li>
+                    <li><strong>Link da Reunião:</strong> <a href="{{zoom_link}}">{{zoom_link}}</a></li>
+                </ul>
+            </div>
+
+            <h3>🔗 Links Importantes</h3>
+            <p>
+                <a href="{{zoom_link}}" class="button">Acessar Reunião Zoom</a>
+                <a href="{{reschedule_url}}" class="button">Reagendar Novamente</a>
+                <a href="{{cancel_url}}" class="button">Cancelar</a>
+            </p>
+
+            <p>Estamos no aguardo da nossa sessão no novo horário!</p>
+
+            <p>Atenciosamente,<br>
+            <strong>Equipe Meu PDI</strong></p>
+        </div>
+
+        <div class="footer">
+            <p>Este é um email automático • <a href="https://meupdi.com">meupdi.com</a></p>
+        </div>
+    </div>
+</body>
+</html>

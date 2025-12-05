@@ -1,0 +1,171 @@
+<!-- Loading State -->
+<div *ngIf="isLoading()" class="loading-container">
+  <div class="loading-content">
+    <mat-spinner diameter="50" color="primary"></mat-spinner>
+    <p class="loading-text">Carregando dashboard...</p>
+  </div>
+</div>
+
+<!-- Error State -->
+<div *ngIf="error() && !isLoading()" class="error-container">
+  <div class="error-content">
+    <mat-icon class="error-icon">error</mat-icon>
+    <h2 class="error-title">Erro ao carregar dashboard</h2>
+    <p class="error-message">{{ error() }}</p>
+    <button mat-raised-button color="primary" (click)="onRetry()">
+      <mat-icon>refresh</mat-icon>
+      Tentar Novamente
+    </button>
+  </div>
+</div>
+
+<!-- Main Dashboard -->
+<div *ngIf="!isLoading() && !error()" class="dashboard-container">
+  <!-- Header -->
+  <header class="dashboard-header">
+    <div class="header-content">
+      <h1 class="header-title">Meu PDI - Dashboard</h1>
+      <div class="header-actions">
+        <span *ngIf="userName()" class="user-greeting">
+          Olá, {{ userName() }}!
+        </span>
+        <button mat-raised-button color="warn" (click)="onLogout()" class="logout-button">
+          <mat-icon>logout</mat-icon>
+          Sair
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="dashboard-main">
+    <!-- Welcome Section -->
+    <div *ngIf="fullUserName()" class="welcome-card">
+      <mat-card>
+        <mat-card-content>
+          <h2 class="welcome-title">Bem-vindo de volta, {{ fullUserName() }}!</h2>
+          <p class="welcome-subtitle">Continue sua jornada de desenvolvimento pessoal. Aqui está seu progresso atual.</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <!-- Dashboard Grid -->
+    <div class="dashboard-grid">
+      <!-- PDI Overview -->
+      <mat-card class="overview-card">
+        <mat-card-header>
+          <mat-card-title>Visão Geral do PDI</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div *ngIf="pdiOverview(); else noPdiData" class="overview-content">
+            <!-- Status -->
+            <div class="overview-item">
+              <span class="item-label">Status Geral:</span>
+              <span class="status-badge" [ngClass]="getStatusColor(pdiOverview()!.status_geral)">
+                {{ pdiOverview()!.status_geral.replace('_', ' ').toUpperCase() }}
+              </span>
+            </div>
+
+            <!-- Objetivos Ativos -->
+            <div class="overview-item">
+              <span class="item-label">Objetivos Ativos:</span>
+              <span class="item-value">{{ pdiOverview()!.objetivos_ativos }}</span>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-section">
+              <div class="progress-header">
+                <span class="item-label">Progresso Geral:</span>
+                <span class="progress-value">{{ pdiOverview()!.progresso_percentual.toFixed(1) }}%</span>
+              </div>
+              <mat-progress-bar
+                mode="determinate"
+                [value]="pdiOverview()!.progresso_percentual"
+                class="progress-bar">
+              </mat-progress-bar>
+            </div>
+
+            <!-- Próximas Ações -->
+            <div *ngIf="pdiOverview()!.proximas_acoes.length > 0" class="actions-section">
+              <span class="item-label">Próximas Ações:</span>
+              <ul class="actions-list">
+                <li *ngFor="let acao of pdiOverview()!.proximas_acoes.slice(0, 3); let i = index" class="action-item">
+                  <mat-icon class="action-icon">arrow_right</mat-icon>
+                  {{ acao }}
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <ng-template #noPdiData>
+            <p class="no-data-text">Dados do PDI não disponíveis</p>
+          </ng-template>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Next Steps -->
+      <mat-card class="next-steps-card">
+        <mat-card-header>
+          <mat-card-title>Próximos Passos</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div *ngIf="nextSteps().length > 0; else noSteps" class="steps-content">
+            <div *ngFor="let step of nextSteps().slice(0, 4); let i = index"
+                 class="step-card"
+                 [ngClass]="getPriorityColor(step.prioridade)"
+                 (click)="onNextStepClick(step)">
+              <div class="step-header">
+                <h4 class="step-title">{{ step.titulo }}</h4>
+                <span class="priority-badge" [ngClass]="getPriorityBadgeColor(step.prioridade)">
+                  {{ step.prioridade }}
+                </span>
+              </div>
+              <p class="step-description">{{ step.descricao }}</p>
+            </div>
+          </div>
+
+          <ng-template #noSteps>
+            <p class="no-data-text">Nenhuma ação recomendada no momento</p>
+          </ng-template>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <!-- Quick Actions -->
+    <mat-card class="quick-actions-card">
+      <mat-card-header>
+        <mat-card-title>Ações Rápidas</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="actions-grid">
+          <button mat-raised-button
+                  class="action-button update-pdi"
+                  (click)="onQuickAction('update-pdi')">
+            <mat-icon class="action-icon">edit</mat-icon>
+            <span class="action-label">Atualizar PDI</span>
+          </button>
+
+          <button mat-raised-button
+                  class="action-button schedule-session"
+                  (click)="onQuickAction('schedule-session')">
+            <mat-icon class="action-icon">event</mat-icon>
+            <span class="action-label">Agendar Sessão</span>
+          </button>
+
+          <button mat-raised-button
+                  class="action-button edit-profile"
+                  (click)="onQuickAction('edit-profile')">
+            <mat-icon class="action-icon">person</mat-icon>
+            <span class="action-label">Editar Perfil</span>
+          </button>
+
+          <button mat-raised-button
+                  class="action-button view-reports"
+                  (click)="onQuickAction('view-reports')">
+            <mat-icon class="action-icon">analytics</mat-icon>
+            <span class="action-label">Ver Relatórios</span>
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </main>
+</div>
