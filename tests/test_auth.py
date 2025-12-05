@@ -3,7 +3,7 @@ def test_cadastro_usuario_dados_validos(client, sample_user_data):
     """Testa cadastro com dados válidos"""
     # Arrange
     # Act
-    response = client.post("/register", json=sample_user_data)
+    response = client.post("/auth/register", json=sample_user_data)
 
     # Assert
     assert response.status_code == 200
@@ -18,14 +18,14 @@ def test_cadastro_usuario_dados_validos(client, sample_user_data):
 def test_cadastro_usuario_email_duplicado(client, sample_user_data):
     """Testa erro ao cadastrar email duplicado"""
     # Arrange
-    client.post("/register", json=sample_user_data)  # Primeiro cadastro
+    client.post("/auth/register", json=sample_user_data)  # Primeiro cadastro
 
     # Act
-    response = client.post("/register", json=sample_user_data)  # Segundo cadastro
+    response = client.post("/auth/register", json=sample_user_data)  # Segundo cadastro
 
     # Assert
     assert response.status_code == 400
-    assert "Email ja cadastrado" in response.json()["detail"]
+    assert "Email já cadastrado" in response.json()["detail"]
 
 def test_cadastro_usuario_email_invalido(client):
     """Testa erro com email inválido"""
@@ -39,7 +39,7 @@ def test_cadastro_usuario_email_invalido(client):
     }
 
     # Act
-    response = client.post("/register", json=invalid_data)
+    response = client.post("/auth/register", json=invalid_data)
 
     # Assert
     assert response.status_code == 422  # Validation error
@@ -56,7 +56,7 @@ def test_cadastro_usuario_senha_fraca(client):
     }
 
     # Act
-    response = client.post("/register", json=weak_password_data)
+    response = client.post("/auth/register", json=weak_password_data)
 
     # Assert
     assert response.status_code == 422  # Validation error

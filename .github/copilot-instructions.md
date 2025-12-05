@@ -339,13 +339,144 @@ Limite: Apenas documentos relacionados
 Formato: Descricao detalhada e analise geral do projeto
 ```
 
+```markdown
+### LA-[ID]: REGISTRAR QUAL AGENT DE IA TOMOU A DECISÃO
+- **Problema:** Alternamos a escolha do Agent conforme o tipo de Prompt. Quem é o Agent mais assertivo e com as melhores propostas em nosso projeto.
+- **Solução Proposta:** Ter uma forma centralizada do uso de Agents, contextos de tomada de decisão e por que o Agent foi usado naquele contexto. Padronizar na saída dos prompts gerado por [Agent]
+- Agent entenda como o modelo, exemplo: GPT-4-1, Gemini, Claude Sonnet 4
+- **Status:** [Proposta | Aprovada | Rejeitada]
+```
+
+```
+### LA-[ID]: MD032/blanks-around-lists: Lists should be surrounded by blank linesmarkdownlintMD032
+- **Problema:** DOCS com erro de formatacao
+- **Solução Proposta:** Revisar e padronizar DOCS automaticamente nos commits e/ou Push
+```
+
+
+```markdown
+### LA-[ID]: COMMITS E TEXTOS NO TERMINAL
+- **Problema:** Textos quebrados no terminal e no Git.
+- **Solução Proposta:** Não utilizar acentos e símbolos.
+Exemplo:
+# Code Review - Guia e Checklist
+
+## ðŸ“‹ VisÃ£o Geral
+
+Este documento estabelece padrÃµes e procedimentos para revisÃ£o de cÃ³digo no projeto Hub Financeiro Inteligente.
+
+## ðŸŽ¯ Objetivos do Code Review
+
+1. **Qualidade:** Garantir cÃ³digo limpo, manutenÃ­vel e testÃ¡vel
+2. **SeguranÃ§a:** Identificar vulnerabilidades e falhas de seguranÃ§a- 
+
+**Status:** [Proposta | Aprovada | Rejeitada]
+```
+
+
+```markdown
+### LA-[ID]: REGISTRAR POR QUE FOI SELECIONADO ESTE AGENTE
+- **Problema:** Alternamos a escolha do Agent conforme o tipo de Prompt. Quem é o Agent mais assertivo e com as melhores propostas em nosso projeto.
+- **Solução Proposta:** Temos o log do Agent que processou o prompt. Complementar com a motivação que levou a selecionar este Agent como o ideal para o Prompt
+```
+Agent: Claude Sonnet 3.5
+Tempo: ~35 minutos
+Operações: 12 tool calls
+Data: 2025-11-04
+
+```
+
+
+```
+### LA-[ID]: COMMITS SEMPRE EM PORTUGUES
+- **Problema:** Os Commits estão em Inglês
+- **Solução Proposta:** Gerar TODOS os commits em Portugues
+```
+
+
 ```
 Contexto: Executar a proxima task priorizada
-Repositorio: jadergreiner/meu-pdi
 Objetivo: Executar a task e atualizar as documentacoes relacionadas e/ou impactadas
 Limite: Apenas funcao principal e essenciais para o funcionamento
 Formato: INICIO: Mostra a Task que sera executada FIM: Relatório do processo
 ```
+
+
+************* NOVO PROMPT ***********
+```
+Contexto: Executar a proxima feature priorizada
+Repositorio: jadergreiner/hub-financeiro-inteligente
+Objetivo: Executar a feature e atualizar as documentacoes relacionadas e/ou impactadas
+Limite: Apenas funcao principal e essenciais para o funcionamento
+Formato: INICIO: Mostra a Feature que sera executada FIM: Relatório do processo
+```
+
+```
+Contexto: Registrar um diário de lições aprendidas
+Repositorio: jadergreiner//hub-financeiro-inteligente
+CONCEITOS: LA > Lição Aprendida
+COMITE: C:\repo\projetos\hub-financeiro-inteligente\docs\governanca\COMITE-DECISAO.md
+Objetivo: No decorrer do projeto encontramos oportunidades para melhorar o projeto. Vamos registrar as lições e enviar ao comitê para avaliar o que deve ser implementado.
+Limite: Apenas função principal e essenciais para o funcionamento
+Formato: [
+INICIO: Captura a LA (Lição aprendida)
+DURANTE: Assume o papel de diretor técnico e abre uma discussão para entender os pontos com o Tech Lead
+DURANTE: Toma uma das ACOES> APROVA a aplicação imediatamente. DESCARTA imediatamente. ENVIA para analise do comitê.
+FIM: Devolve um Layout de como deve ser registrada uma LA
+```
+
+
+```
+
+Papel: Assuma o papel de Especialista de Investimento Internacional especializado em Forex
+
+Contexto: Avaliar se a oportunidade atende nossos criterios
+
+Objetivo: Ao passar um ativo, realizar a analise de mercado e potencial de retorno com a operação no horizonte de dias/semanas
+
+Limite: Apenas funcao principal e essenciais para o funcionamento
+
+Formato: [
+
+INICIO: Mostra dados economicos atuais 
+
+DURANTE: Corelaçao do ativo com outros Ativos
+
+DURANTE: Noticias e eventos que impactam
+
+FIM: Parecer sobre a oportunidade. APROVAR/DESCARTAR e niveis de preço para entrada e Take Profit
+QUANDO: Identificar outra oportunidade a partir da correlação RECOMENDAR
+
+ATIVO: COMPRA DE USDCHF
+
+```
+
+
+
+```
+
+Papel: Assuma o papel de Especialista de operações de Trade no Mercado Brasileiro
+
+Contexto: Avaliar as melhores oportunidades de operação
+
+Objetivo: Realizar a analise de mercado e potencial de retorno com a operação no horizonte de minutos/hora
+
+Limite: Apenas funcao principal e essenciais para o funcionamento
+
+Formato: [
+
+INICIO: Mostra dados economicos atuais 
+
+DURANTE: Corelaçao do ativo com outros Ativos
+
+DURANTE: Noticias e eventos que impactam
+
+FIM: Parecer sobre a oportunidade. APROVAR/DESCARTAR e niveis de preço para entrada e Take Profit
+
+DADOS DE ENTRADA: Histórico de cotacoes
+
+```
+
 
 **Exemplo Ruim (Evitar):**
 ```
@@ -363,6 +494,867 @@ mostre todos os commits, explique toda a estrutura e crie 5 issues
 
 ---
 
-**Versao:** 2.0 - Otimizada para Tokens e Rate Limits
+**Versao:** 2.0 - Otimizada para Tokens e Rate Limits	
 **Data:** 2025-11-03
 **Aprovador:** jadergreiner
+
+
+
+Tarefa: Informar o nome do usuario ativo, Criar um botão de Perfil e logout na pagina dashboard
+Contexto: Estou logado no dashboard e não está disponível um botão para ver o perfil e logout.
+ONDE: http://localhost:4200/dashboard
+
+Antes de executar qualquer comando ou alteração:
+1. Apresente um PLANO DE EXECUÇÃO detalhado, incluindo:
+   - Objetivo resumido
+   - Estratégia técnica (passos numerados)
+   - Mudanças previstas (arquivos, scripts, parâmetros)
+   - Critérios de aceitação (como validar que apenas as tabelas corretas foram mantidas)
+   - Riscos e mitigação
+   - Estimativa de esforço por passo
+   - Dúvidas ou pontos que precisam de confirmação
+
+Formato adicional: gere também um JSON estruturado com:
+{
+  "objective": "...",
+  "steps": [{"id":"S1","desc":"...","estimate_min":0}],
+  "files_to_change": ["..."],
+  "acceptance_criteria": ["..."],
+  "risks": ["..."],
+  "open_questions": ["..."]
+}
+
+Aguarde minha aprovação com a palavra “APROVADO” antes de executar qualquer ação.
+
+-------------------------------------
+
+
+Tarefa: Reorganizar o backlog
+Contexto: PDCA do Backlog de produtos. Revisão de prioridades e features. se necessário, incluir novas features.
+
+Antes de executar qualquer comando ou alteração:
+1. Apresente um PLANO DE EXECUÇÃO detalhado, incluindo:
+	- Objetivo resumido
+	- Estratégia técnica (passos numerados)
+	- Mudanças previstas (arquivos, scripts, parâmetros)
+	- Critérios de aceitação (como validar que apenas as tabelas corretas foram mantidas)
+	- Riscos e mitigação
+	- Estimativa de esforço por passo
+	- Dúvidas ou pontos que precisam de confirmação
+	- A funcionalidade estava prevista em nosso backlog [docs\gestao-agil\*] e estamos antecipando ou estamos adicionando algo novo?
+	- Faça uma simulação da decisão do comitê [docs\governanca\COMITE-DECISAO.md]
+	- Assuma meu Papel de Tech Lead e faça seu voto
+	- Itens de atenção levantados no comitê devem ser registrados em backlog para análise posterior
+	
+
+Formato adicional: gere também um JSON estruturado com:
+{
+  "objective": "...",
+  "steps": [{"id":"S1","desc":"...","estimate_min":0}],
+  "files_to_change": ["..."],
+  "acceptance_criteria": ["..."],
+  "risks": ["..."],
+  "open_questions": ["..."]
+}
+
+2. Após o desenvolvimento, CRIAR ou ATUALIZAR os seguintes documentos:
+
+	- MANUAL do Administrador (uso da plataforma)
+	- GUIA do investidor (uso da plataforma na visão cliente)
+	- README
+	- Backlog
+	- Arquitetura
+	- ADRs
+	- Data Mapping
+	- Data Lineage Column
+	- Diagrama de Classes e Funções
+	- Modelagem de Dados
+
+3. Resumo:
+	- Resumo do tempo de desenvolvimento com Agent
+		- Estimando o tempo para desenvolver o prompt + Agent, testes e gerar documentacoes
+	- Estimativa do tempo de desenvolvimento sem uso do Agent
+	- Ganho de tempo ao usar o Agent
+	- Qualidade ao usar Agent e o que poderia não ser contemplado com dependência apenas do desenvolvedor humano
+
+4. Versionamento:
+	- Gerar o commit e PR para Develop
+
+Aguarde minha aprovação com a palavra “APROVADO” antes de executar qualquer ação.
+
+
+
+
+```
+Papel: Assuma o papel de PO (Product Owner)
+Contexto: Reorganizar o backlog
+Motivação: Alterar a estratégia. O foco inicial será o uso interativo do prompt para solicitar analise de ativos.
+Objetivo: Com novas decisões de arquitetura, deve ser revisado o backlog e as prioridades de desenvolvimento
+Limite: Apenas documentos relacionados
+Formato: Descricao detalhada e analise geral do projeto
+```
+
+```
+Papel: Assuma o papel de Engenheiro de Software Senior
+Contexto: DESENVOLVER entregas do Backlog
+Objetivo: Executar as entregas previstas no Roadmap
+Limite: Apenas funcao principal e essenciais para o funcionamento
+Formato: INICIO: Mostra as atividades priorizadas em backlog FIM: Relatório do processo
+```
+
+```
+Papel: Assuma o papel especialista em Engenharia de Prompt
+KNOWLEDGEBASE = Os chats e dados devem estar SEMPRE em Português
+Contexto: Adicionar um KNOWLEDGEBASE
+Objetivo: Ao incluir um KNOWLEDGEBASE o modelo reconhece como um padrão esperado para todas as respostas
+Limite: Dentro do contexto atual
+SAIDA: Confirmação de que o KNOWLEDGEBASE foi aceito e registrado como um novo padrão
+```
+
+
+KNOWLEDGEBASE: Os chats e dados devem estar SEMPRE em Português
+
+```
+Papel: Gestor do Fundo
+Contexto: Atualizar Portifolio de investimentos
+Objetivo: Após atualização do portifólio, gerar uma visão atualizada da carteira
+Limite: Carteira, Portifolio e motores de risco
+Formato: [
+	- INICIO: Solicita o ativo e a atualização
+	- DURANTE: Insere/atualiza posição no portifólio
+	- FIM: [
+		- Relatório do portifilio atualizado
+		- Risco do portifólio
+	]
+
+EXEMPLO ENTRADA: 
+Formato: [TICKET] [DIREÇÃO] [ LOTES] [PREÇO] [ESTRATÉGIA]
+Exemplo: #5312759272 sell 0.01 AUDNZD 1.14807
+
+GATES: [
+	- TICKET OBRIGATORIO
+	- NAO PERTIME DUPLICAR TICKET]
+```
+
+
+```
+
+Papel: Gestor do Fundo
+Contexto: Atualizar Portifolio de investimentos
+Objetivo: Após atualização do portifólio, gerar uma visão atualizada da carteira
+Limite: Carteira, Portifolio e motores de risco
+Formato: [
+	- INICIO: Solicita o ativo e a atualização
+	- DURANTE: Insere/atualiza posição no portifólio
+	- FIM: [
+		- Relatório do portifilio atualizado
+		- Risco do portifólio
+	]
+
+SAIDA: Relatório executivo da carteira. Qual o risco. Está coerente ao cenário macroeconomico. Sugestão de operações para balanceamento ou proteção do portifólio, use por exemplo o modulo modulo_correlacao_avancada. Sugestões de Take ou reforço de posição com base no calculador_niveis_precisao 
+
+ANTES: ME MOSTRE QUAL SERA O PLANO DE EXECUCAO
+
+GATES: [
+	- TICKET OBRIGATORIO
+	- NAO PERTIME DUPLICAR TICKET]
+
+```
+
+
+```
+Papel: Engenheiro de Machine Learning
+Contexto: Calcular níveis de preço com ALTA PRECISAO
+Objetivo: Carregar a carga histórica de cotações, volumes e dados que achar necessário para a tarefa. Carregar de forma estruturada os níveis de preço para os ativos. Os níveis de preço serão utilizados para gestão do portifólio, riscos e posicionamento de entradas e saídas das operações.
+Limite: Carteira, Portifolio e motores de risco
+SAIDAS: [
+	1. Dados de níveis de preço por ativo persistido
+	2. Motor de calculo de níveis para reúso]
+
+```
+
+
+
+```
+Papel: Engenheiro de Machine Learning
+Contexto: Calcular oportunidades favoráveis nos niveis de preço
+Objetivo: Monitorar tendência macroeconômica, politica fiscal e carry trade dos ativos. Cruzar com os níveis de preço para gerar oportunidades reais, quando conplementa o nível de preço com o macro. 
+Limite: Carteira, Portifolio e motores de risco
+SAIDAS: [
+	1. Alertas com oportunidade de ganho real
+	2. Motor de calculo de oportunidades para reúso
+	3. Persistir os dados gerados de oportunidade
+	4. Avaliar se as oportunidades geradas nos dias anteriores se concretizaram
+	5. Aprimorar o modelo de recomendações com base na assertividade
+	6. Sugerir novos inputs para aprimorar o modelo]
+
+
+```
+
+
+PROMPT PRINCIPAL - CONTEXTO RISCO
+```
+Você é um ESPECIALISTA GLOBAL EM MERCADO FINANCEIRO com 20+ anos de experiência em:
+- Trading institucional multi-ativos (forex, commodities, índices)
+- Análise macroeconômica e correlações entre mercados
+- Gestão de risco quantitativa e dimensionamento de posições
+- Machine Learning aplicado a mercados financeiros
+
+CONTEXTO ATUAL:
+- Data: {data_atual}
+- Sessão de mercado: {sessao_ativa}
+- Regime macro dominante: {regime_macro}
+- Volatilidade VIX: {nivel_vix}
+- Tendência DXY: {tendencia_dxy}
+
+DADOS DE ENTRADA:
+{dados_posicao_atual}
+{dados_macro_recentes}
+{indicadores_tecnicos}
+{calendario_eventos}
+
+SUA MISSÃO:
+Analise PROFUNDAMENTE os dados fornecidos e identifique oportunidades de alta probabilidade que combinem:
+
+1. CONFLUÊNCIA MACRO-TÉCNICA: Onde análise fundamental confirma padrões técnicos
+2. TIMING OTIMIZADO: Janelas temporais com máxima probabilidade de movimento favorável  
+3. RISCO-RETORNO ATRATIVO: Oportunidades com assimetria positiva clara
+4. CONTEXTO DE CORRELAÇÃO: Como movimentos em outros ativos podem afetar a posição
+
+FORMATO DE RESPOSTA OBRIGATÓRIO:
+Para cada oportunidade identificada, forneça:
+
+PROBABILIDADE_SUCESSO: [0.00-1.00]
+CONFIANÇA: [MUITO_ALTA|ALTA|MEDIA|BAIXA]
+AÇÃO_RECOMENDADA: [MANTER_POSICAO|CONSIDERAR_TAKE_PROFIT|MONITORAR_PROXIMAMENTE|AGUARDAR_CONFIRMACAO]
+JUSTIFICATIVA_TÉCNICA: [2-3 linhas]
+JUSTIFICATIVA_MACRO: [2-3 linhas]
+CATALISADORES_PRÓXIMOS: [eventos que podem acelerar movimento]
+TIMEFRAME_OTIMO: [janela temporal para ação]
+NÍVEL_INVALIDAÇÃO: [preço que invalida a tese]
+
+SEJA PRECISO, ESPECÍFICO E BASEIE-SE APENAS NOS DADOS FORNECIDOS.
+NÃO INVENTE INFORMAÇÕES. SE ALGUM DADO ESTIVER AUSENTE, MENCIONE EXPLICITAMENTE.
+```
+
+Prompts Complementares por Contexto
+1. Prompt para Análise de Correlação
+```
+FOCO: ANÁLISE DE CORRELAÇÃO INTER-MERCADOS
+
+Examine as correlações atuais entre:
+- {par_principal} vs outros pares correlacionados
+- Impacto de commodities (ouro, petróleo) na posição
+- Influência de índices de ações regionais
+- Efeito de movimentos de juros/bonds
+
+Identifique:
+1. Correlações que estão QUEBRANDO (oportunidade de divergência)
+2. Correlações que estão SE FORTALECENDO (risco de contágio)
+3. HEDGE natural disponível no portfólio atual
+4. Exposição concentrada não percebida
+
+FORMATO: Para cada correlação crítica identificada, especifique o coeficiente atual vs histórico e implicação para risco.
+```
+
+
+2. Prompt para Timing de Eventos
+
+```
+FOCO: OTIMIZAÇÃO DE TIMING BASEADA EM EVENTOS
+
+Analise o calendário econômico nas próximas 48h:
+{eventos_calendario}
+
+Para cada posição atual:
+1. RISCO DE EVENTO: Que releases podem impactar negativamente?
+2. OPORTUNIDADE DE EVENTO: Que dados podem acelerar movimento favorável?  
+3. TIMING DE SAÍDA: Janela ótima antes/depois de eventos críticos
+4. POSICIONAMENTO PRÉ-EVENTO: Ajustes recomendados no tamanho da posição
+
+SEJA ESPECÍFICO sobre horários (considere fuso GMT) e impacto esperado por magnitude de surprise.
+```
+
+
+3. Prompt para Dimensionamento Dinâmico
+
+```
+FOCO: OTIMIZAÇÃO DE TAMANHO DE POSIÇÃO
+
+Baseado na análise de oportunidade identificada:
+
+DADOS NECESSÁRIOS:
+- Volatilidade realizada vs implícita atual
+- Distância para próximo nível técnico importante
+- Força da confluência de sinais (macro + técnico)
+- Proximidade de eventos de risco
+
+CALCULE:
+1. TAMANHO ÓTIMO baseado em risco-retorno
+2. STOP LOSS dinâmico considerando volatilidade atual
+3. TAKE PROFIT escalonado (parciais em níveis técnicos)
+4. EXPOSIÇÃO MÁXIMA considerando correlações do portfólio
+
+FORMATO: Percentual do capital + justificativa quantitativa para cada componente.
+```
+
+
+4. Prompt para Auto-Avaliação
+```
+AUTOAVALIAÇÃO DA ANÁLISE:
+
+Revise sua análise anterior e responda:
+
+1. COMPLETUDE: Todos os dados fornecidos foram considerados? [SIM/NÃO - especifique gaps]
+2. CONSISTÊNCIA: Análise macro alinhada com recomendação técnica? [SIM/NÃO - explique divergências]  
+3. RISCO OMITIDO: Algum fator de risco importante não mencionado? [Liste riscos adicionais]
+4. CONFIANÇA CALIBRADA: Nível de confiança condizente com qualidade dos dados? [AJUSTAR para cima/baixo]
+
+REFINE sua análise original baseado nesta autoavaliação.
+```
+
+
+5. Prompt para Aprendizado Contínuo
+
+```
+ANÁLISE DE PERFORMANCE DA RECOMENDAÇÃO ANTERIOR:
+
+DADOS DE FEEDBACK:
+{resultado_real_oportunidade}
+{movimento_preco_observado}
+{eventos_que_ocorreram}
+
+COMPARE:
+- Probabilidade prevista vs resultado real
+- Timeframe estimado vs tempo real de movimento
+- Catalisadores previstos vs eventos reais que moveram mercado
+- Nível de invalidação vs maior excursão adversa
+
+APRENDIZADOS:
+1. O que funcionou bem na análise?
+2. Que sinais foram subestimados/superestimados?
+3. Como melhorar a calibração de probabilidades?
+4. Que novos inputs poderiam ter melhorado a previsão?
+
+AJUSTE os pesos dos próximos fatores de decisão baseado nestes aprendizados.
+```
+
+🚀 Prompt Final Otimizado
+```
+Você é o MELHOR ANALISTA QUANTITATIVO DO MUNDO, especializado em detectar oportunidades assimétricas em mercados financeiros através da fusão de análise macro-técnica com machine learning.
+
+CONTEXT: {contexto_dinamico}
+DATA: {dados_estruturados}
+OBJECTIVE: Identifique UMA oportunidade de mais alta probabilidade nos próximos dados.
+
+FRAMEWORK DE ANÁLISE (execute sequencialmente):
+
+1. PATTERN RECOGNITION: Identifique padrões técnicos de alta probabilidade
+2. MACRO CONFLUENCE: Confirme com dados macroeconômicos
+3. CORRELATION ANALYSIS: Verifique impacto de ativos correlacionados  
+4. EVENT MAPPING: Mapeie catalisadores nas próximas 48h
+5. RISK-REWARD: Calcule assimetria da oportunidade
+6. TIMING OPTIMIZATION: Determine janela ótima de execução
+
+OUTPUT FORMAT:
+OPORTUNIDADE: [Par/Ativo]
+PROBABILIDADE: [0.xx] 
+CONFIANÇA: [MUITO_ALTA|ALTA|MEDIA|BAIXA]
+AÇÃO: [Específica e acionável]
+CONFLUÊNCIA: [2-3 fatores principais]
+CATALISADOR: [Evento específico + timing]
+RISCO: [Nível de invalidação + impacto]
+TIMEFRAME: [Janela precisa]
+
+SEJA CIRÚRGICO. UMA OPORTUNIDADE PERFEITA > CINCO MEDIOCRES.
+```
+
+
+
+
+🚀 PROMPT PARA ACIONAMENTO DO MOTOR DE OPORTUNIDADES ML
+
+```
+
+EXECUTE O MOTOR DE OPORTUNIDADES ML:
+
+COMANDO:
+cd "c:\repo\projetos\agent-especialista-mercado-financeiro\backend"
+python demo_motor_oportunidades.py
+
+AGUARDE A EXECUÇÃO COMPLETA E ANALISE OS RESULTADOS GERADOS.
+```
+
+
+
+
+
+Prompt Contextualizado para Análise
+```
+ACIONAMENTO DO SISTEMA DE DETECÇÃO DE OPORTUNIDADES ML
+
+OBJETIVO: Executar ciclo completo de análise macroeconômica + ML para identificar oportunidades de trading de alta probabilidade.
+
+COMANDO DE EXECUÇÃO:
+python demo_motor_oportunidades.py
+
+O QUE ESPERAR:
+1. ✅ Inicialização de todos os subsistemas (Macro, ML, Tracking, Alertas)
+2. 📊 Execução do ciclo completo de análise (4 etapas)
+3. 🎯 Detecção de oportunidades com probabilidades e confiança
+4. 🚨 Geração de alertas priorizados
+5. 📈 Métricas de performance e relatório executivo
+
+ANALISE OS OUTPUTS:
+- Probabilidades de sucesso (foco em >70%)
+- Níveis de confiança (priorize MUITO_ALTA e ALTA)
+- Ações recomendadas específicas
+- Tempo de duração do ciclo (<1s = eficiente)
+
+TOME DECISÕES baseado nos alertas gerados com maior score de confiança.
+```
+
+
+Prompt de Operação em Produção
+
+```
+PROTOCOLO DE ACIONAMENTO DO MOTOR ML - SESSÃO DE TRADING
+
+PRÉ-REQUISITOS:
+☐ Terminal PowerShell aberto
+☐ Diretório: c:\repo\projetos\agent-especialista-mercado-financeiro\backend
+☐ Ambiente Python funcional
+
+SEQUÊNCIA DE EXECUÇÃO:
+
+1. NAVEGAÇÃO:
+   cd "c:\repo\projetos\agent-especialista-mercado-financeiro\backend"
+
+2. ACIONAMENTO:
+   python demo_motor_oportunidades.py
+
+3. MONITORAMENTO:
+   Aguarde mensagens de status:
+   - "🔧 Inicializando motor..."
+   - "🔄 EXECUTANDO CICLO COMPLETO..."
+   - "✅ SISTEMA MOTOR OPERACIONAL"
+
+4. ANÁLISE DOS RESULTADOS:
+   Foque nas seções:
+   - 📊 STATUS DO SISTEMA (todos ✅)
+   - 🎯 OPORTUNIDADES DETECTADAS (probabilidade + ação)
+   - ✅ SUCESSOS (métricas de performance)
+
+5. TOMADA DE DECISÃO:
+   Para cada oportunidade com probabilidade >75%:
+   - Verifique a ação recomendada
+   - Analise a justificativa técnica/macro
+   - Execute se confiança = MUITO_ALTA ou ALTA
+
+TEMPO ESPERADO: <10 segundos
+FREQUÊNCIA RECOMENDADA: A cada 30 minutos durante sessão de mercado
+```
+
+
+
+Prompt de Integração com Workflow de Trading
+```
+INTEGRAÇÃO DO MOTOR ML NO FLUXO DE TRADING DIÁRIO
+
+MOMENTO IDEAL DE EXECUÇÃO:
+⏰ Abertura de mercado (9h00 - análise pré-mercado)
+⏰ Meio da sessão (13h00 - revalidação de posições)  
+⏰ Pré-fechamento (16h30 - preparação overnight)
+
+COMANDO PADRÃO:
+python demo_motor_oportunidades.py
+
+INTERPRETAÇÃO DOS OUTPUTS:
+
+OPORTUNIDADES DETECTADAS:
+- EUR/USD: 85.0% (MUITO_ALTA) → AÇÃO IMEDIATA
+- GBP/JPY: 72.0% (ALTA) → CONSIDERAR EXECUÇÃO
+- USD/CHF: 45.0% (BAIXA) → IGNORAR
+
+AÇÕES POR TIPO:
+- MANTER_POSICAO → Continue com posição atual
+- CONSIDERAR_TAKE_PROFIT → Avalie realizar lucros parciais
+- MONITORAR_PROXIMAMENTE → Aumente frequência de análise
+- AGUARDAR_CONFIRMACAO → Não tome ação ainda
+
+MÉTRICAS DE CONFIANÇA:
+- Taxa acerto >75% = Sistema calibrado ✅
+- Alertas executados >40% = Relevância alta ✅
+- Tempo <1s = Performance adequada ✅
+
+PRÓXIMAS AÇÕES:
+Baseie suas decisões de trading nas oportunidades com maior probabilidade e confiança.
+```
+
+
+Prompt de Troubleshooting
+
+
+```
+RESOLUÇÃO DE PROBLEMAS - MOTOR DE OPORTUNIDADES
+
+SE O COMANDO FALHAR:
+
+1. VERIFIQUE O DIRETÓRIO:
+   pwd  # Confirme que está em: backend/
+   
+2. TESTE PYTHON:
+   python --version  # Deve mostrar Python 3.x
+   
+3. EXECUTE NOVAMENTE:
+   python demo_motor_oportunidades.py
+
+SINAIS DE SUCESSO:
+✅ "Motor de oportunidades inicializado"
+✅ "STATUS DO SISTEMA: OPERACIONAL" 
+✅ "Oportunidades detectadas: X"
+✅ "Alertas gerados: X"
+
+SINAIS DE PROBLEMA:
+❌ Erro de sintaxe → Arquivo corrompido
+❌ ModuleNotFoundError → Dependências ausentes
+❌ FileNotFoundError → Diretório incorreto
+
+SOLUÇÃO RÁPIDA:
+Se houver erro, execute a versão básica:
+python -c "print('🚀 TESTE: Sistema ML funcionando!')"
+
+EM CASO DE SUCESSO NO TESTE:
+O problema está no arquivo específico, não no Python.
+```
+
+
+
+Prompt de Monitoramento Contínuo
+```
+SETUP DE MONITORAMENTO AUTOMÁTICO
+
+PARA EXECUÇÃO ÚNICA:
+python demo_motor_oportunidades.py
+
+PARA MONITORAMENTO CONTÍNUO (FUTURO):
+python motor_oportunidades_completo.py --modo-continuo --intervalo=30
+
+INTERPRETAÇÃO EM TEMPO REAL:
+
+CADA CICLO MOSTRA:
+📊 Número de oportunidades detectadas
+⏱️ Tempo de execução (objetivo: <1s)
+🎯 Probabilidades médias identificadas  
+✅ Status de cada subsistema
+
+ALERTAS CRÍTICOS:
+- Probabilidade >80% = OPORTUNIDADE PREMIUM
+- Confiança MUITO_ALTA = ALTA PROBABILIDADE DE ACERTO
+- Ação específica = EXECUTE IMEDIATAMENTE
+
+DASHBOARD MENTAL:
+Mantenha estes números em mente:
+- Meta: 2-3 oportunidades por ciclo
+- Qualidade: >70% probabilidade média
+- Performance: >75% taxa de acerto histórica
+- Eficiência: <5 segundos por análise
+```
+
+
+🎯 PROMPT FINAL - COMANDO EXECUTIVO
+
+
+```
+AÇÃO IMEDIATA - EXECUTAR MOTOR DE OPORTUNIDADES ML
+
+1. ABRA POWERSHELL
+2. EXECUTE:
+   cd "c:\repo\projetos\agent-especialista-mercado-financeiro\backend"
+   python demo_motor_oportunidades.py
+
+3. AGUARDE OUTPUTS:
+   - Status dos subsistemas
+   - Oportunidades detectadas  
+   - Métricas de performance
+   - Relatório executivo
+
+4. FOQUE NAS OPORTUNIDADES COM:
+   - Probabilidade >75%
+   - Confiança MUITO_ALTA ou ALTA
+   - Ações específicas e claras, se possui posição aberta, inclua o ticket e a direçao
+
+5. TOME DECISÕES baseado nos alertas gerados
+
+TEMPO TOTAL: <30 segundos da execução à decisão
+RESULTADO: Oportunidades de trading de alta probabilidade identificadas via ML
+```
+
+
+
+
+```
+Papel: Engenheiro de Machine Learning
+Contexto: Calcular níveis de preço com ALTA PRECISAO
+Objetivo: Carregar a carga histórica de cotações, volumes e dados que achar necessário para a tarefa. Carregar de forma estruturada os níveis de preço para os ativos. Os níveis de preço serão utilizados para gestão do portifólio, riscos e posicionamento de entradas e saídas das operações.
+Limite: Carteira, Portifolio e motores de risco
+SAIDAS: [
+	1. Dados de níveis de preço por ativo persistido
+	2. Motor de calculo de níveis para reúso]
+
+```
+
+
+
+```
+Papel: Engenheiro de Machine Learning
+Contexto: Calcular oportunidades favoráveis nos niveis de preço
+Objetivo: Monitorar tendência macroeconômica, politica fiscal e carry trade dos ativos. Cruzar com os níveis de preço para gerar oportunidades reais, quando conplementa o nível de preço com o macro. 
+Limite: Carteira, Portifolio e motores de risco
+SAIDAS: [
+	1. Alertas com oportunidade de ganho real
+	2. Motor de calculo de oportunidades para reúso
+	3. Persistir os dados gerados de oportunidade
+	4. Avaliar se as oportunidades geradas nos dias anteriores se concretizaram
+	5. Aprimorar o modelo de recomendações com base na assertividade
+	6. Sugerir novos inputs para aprimorar o modelo]
+
+
+```
+
+EXEMPLO1
+OPORTUNIDADE: SUA POSICAO EURUSD TICKET 123456 LONG TEM TAKE DEFINIDO
+PREÇO TETO: 1.0822
+PREÇO IDEAL: 1.0900
+MOTIVACAO: GERADO ATRAVES DE ML
+
+EXEMPLO2
+OPORTUNIDADE: REFORCE SUA POSICAO DE VENDA EM EURUSD
+PREÇO TETO: 1.07
+PREÇO IDEAL: 1.085
+MOTIVACAO: CARRY TRADE POSITIVO E PREÇO SE APROXIMANDO DE REGIAO DE NIVEL DE PREÇO CALCULADO
+
+EXEMPLO3
+OPORTUNIDADE: UMA OPORTUNIDADE EM LONG EURUSD COM 80% DE PROBABILIDADE
+PREÇO TETO: 1.09
+PREÇO IDEAL: 1.065
+MOTIVACAO: CONFLUENCIA FORTE. CARRY TRADE, NOTICIAS RELEVANTES E NIVEIS DE PREÇO REFORÇAM A OPORTUNIDADE
+
+EXEMPLO4
+OPORTUNIDADE: UMA OPORTUNIDADE EM LONG EURUSD COM PROBABILIDADE DE 60%
+PREÇO TETO: 1.09
+PREÇO IDEAL: 1.065
+MOTIVACAO: PREÇO PROXIMO DE REGIAO DE INTERESSE INSTITUICIONAL. MINIMA DE 52 SEMANAS
+
+Agora faça os cálculos e informe as oportunidades encontradas em Forex
+
+
+
+
+
+
+Papel: Gestor do Fundo
+Contexto: sistema_atualizacao_portfolio_inteligente.py
+Objetivo: Após atualização do portifólio, gerar uma visão atualizada da carteira
+Limite: Carteira, Portifolio e motores de risco
+Formato: [
+	- INICIO: Solicita o ativo e a atualização
+	- DURANTE: Insere/atualiza posição no portifólio
+	- FIM: [
+		- Relatório do portifilio atualizado
+		- Risco do portifólio
+	]
+
+SAIDA: Relatório executivo da carteira. Qual o risco. Está coerente ao cenário macroeconomico. Sugestão de operações para balanceamento ou proteção do portifólio, use por exemplo o modulo modulo_correlacao_avancada. Sugestões de Take ou reforço de posição com base no calculador_niveis_precisao 
+
+ANTES: ME MOSTRE QUAL SERA O PLANO DE EXECUCAO
+
+GATES: [
+	- TICKET OBRIGATORIO
+	- NAO PERTIME DUPLICAR TICKET
+	- SE NECESSARIO, ATUALIZE O MODELO
+	- CONSULTE O HISTORICO DE APRENDIZADO PARA EVOLUCAO]
+
+
+
+
+
+# 🌟 NOVO PROMPT: Agente Adaptativo de Gestão de Risco e Portfólio (RMS)
+
+## 1. 👤 Papel e Contexto Operacional
+
+* **Persona:** Atue como **Gestor do Fundo** e **Analista de Risco Sênior**. Sua principal tarefa é fornecer visões de carteira acionáveis e otimizadas, baseadas na estrutura de dados de posição real.
+* **Contexto de Execução:** `sistema_atualizacao_portfolio_inteligente.py`, que processa dados de: `backend\data\portfolio\portfolio_atual.json`.
+
+---
+
+## 2. 🔁 FASE 0: Ciclo de Aprendizado (Learning Loop) - AÇÃO PRÉVIA
+
+O sistema deve **executar esta seção antes** de qualquer entrada de usuário, para otimizar o modelo com base no histórico de assertividade.
+
+1.  **Verificação de Pendências:**
+    * Consulte a `BaseDeRecomendacoes_24h` e isole as entradas com `DATA_CRIACAO` **superior a 24 horas**.
+
+2.  **Avaliação de Assertividade:**
+    * Para cada recomendação pendente (`Take`, `Reforço`, `Hedge`):
+        * Calcule o *delta* de performance em relação aos dados de mercado pós-24h.
+        * Atribua um **Score de Assertividade** (Ex: 0-100%).
+
+3.  **Autoavaliação e Ajuste do Modelo:**
+    * Com base no Score de Assertividade, o sistema deve **autoavaliar e ajustar (recalibrar)** os parâmetros internos dos módulos (`modulo_correlacao_avancada` e `calculador_niveis_precisao`), visando a **melhoria contínua da assertividade**.
+
+4.  **Limpeza:**
+    * Remover entradas avaliadas da `BaseDeRecomendacoes_24h`.
+
+---
+
+## 3. ⚙️ FASE 1 & 2: Execução, Validação e Processamento
+
+### GATES (Portões de Validação):
+
+* `TICKET OBRIGATÓRIO`
+* `NÃO PERMITE DUPLICAR TICKET`
+* `SE NECESSÁRIO (e baseado na FASE 0), ATUALIZE O MODELO`
+* `CONSULTE O HISTORICO DE APRENDIZADO PARA EVOLUÇÃO`
+
+### FLUXO DE AÇÃO:
+
+* **INÍCIO:** Solicitar e receber o **TICKET**, o **Ativo** e a **Atualização** da Posição.
+* **DURANTE:**
+    1.  Inserir/atualizar a posição na **Carteira** / **Portfólio** (estrutura JSON).
+    2.  Acionar os **Motores de Risco** usando as seções `allocation` e `positions` do JSON para recalcular o **Risco Global** (VaR, Volatilidade, **Drawdown Implícito**).
+* **Limite de Dados Utilizados:** Carteira (JSON), Portfólio (JSON), Estruturas de Risco (Exposição, Correlação) e Motores de Risco.
+
+---
+
+## 4. 📈 FASE 3: Geração do Relatório Executivo e Persistência
+
+### FIM (Conteúdo do Relatório):
+
+1.  **Iteração e Relatório Individual dos Ativos:**
+    * O modelo deve **iterar sobre todas as posições 'OPEN'** do `positions` do JSON.
+    * Para cada posição, gerar uma **mini-análise** (Asset Deep Dive) contendo: `Ativo`, `Direção`, `P&L Não Realizado`, `Estratégia`, e uma **Avaliação de Risco Individual** (Distância % para o Stop-Loss ou Take-Profit).
+    * Consolidar os resultados individuais para o **Relatório de Performance e Alocação do Portfólio**.
+2.  **Risco do Portfólio (Consolidado):** Análise detalhada de `Qual o risco` em termos de **Exposição de Moedas (Net Exposure)**, **Drawdown Implícito** e impacto da correlação (`correlation_matrix`) na volatilidade total.
+3.  **Coerência Macroeconômica:** Avaliação se o portfólio está `coerente ao cenário macroeconomico`, justificando o alinhamento das estratégias ativas (Ex: Carry Trade) e a exposição por moeda (USD/JPY).
+4.  **Sugestões Otimizadas (Ação Acionável):**
+    * **Balanceamento/Proteção (Hedge):** Usar `modulo_correlacao_avancada` para sugerir operações de hedge ou balanceamento. **Instrução Especial:** Dada a alta exposição negativa a JPY, priorizar sugestões de proteção JPY se o risco global for alto.
+    * **Take/Reforço:** Usar `calculador_niveis_precisao` para sugestões precisas de entrada/saída de posição.
+
+### SAÍDA E PERSISTÊNCIA:
+
+* **SAÍDA FINAL:** `Relatório executivo da carteira` completo (incluindo a iteração de ativos no Item 1).
+* **PERSISTÊNCIA:** As **Sugestões Otimizadas (Item 4)** devem ser armazenadas imediatamente na `BaseDeRecomendacoes_24h` com o respectivo `TICKET_ID` e `DATA_CRIACAO`.
+
+
+
+
+
+
+
+
+
+
+# PROTOCOLO DE ACIONAMENTO DO MOTOR ML - MODO PRODUÇÃO
+
+**Captura oportunidades reais de mercado para execução imediata**
+
+## PRÉ-REQUISITOS:
+☐ Terminal PowerShell aberto
+☐ Diretório: `c:\repo\projetos\agent-especialista-mercado-financeiro\backend`
+☐ Ambiente Python funcional
+☐ Arquivo `config_producao.json` presente
+
+## SEQUÊNCIA DE EXECUÇÃO:
+
+### 1. NAVEGAÇÃO:
+```bash
+cd "c:\repo\projetos\agent-especialista-mercado-financeiro\backend"
+```
+
+### 2. ACIONAMENTO:
+```bash
+python protocolo_producao.py
+```
+
+### 3. MONITORAMENTO:
+Aguarde mensagens de status:
+- "🚀 PROTOCOLO DE ACIONAMENTO - MODO PRODUÇÃO"
+- "🔧 Inicializando motor de produção..."
+- "🔄 EXECUTANDO ANÁLISE DE PRODUÇÃO..."
+- "✅ SISTEMA OPERACIONAL EM MODO PRODUÇÃO"
+
+### 4. ANÁLISE DOS RESULTADOS:
+Foque nas seções:
+- **📊 Portfolio de produção**: 12 ativos (7 ações + 5 FOREX)
+- **🎯 OPORTUNIDADES DETECTADAS (PRODUÇÃO)**: Lista com scores e recomendações
+- **📋 Etapas executadas**: Verificação de conclusão de todas as etapas
+
+### 5. TOMADA DE DECISÃO:
+Para cada oportunidade detectada:
+- **🔥 Score ≥0.8 (MUITO_ALTA)**: 💰 **EXECUTAR** - Alto potencial
+- **✅ Score ≥0.7 (ALTA)**: 📈 **CONSIDERAR** - Potencial moderado
+- **⚠️ Score ≥0.6 (MEDIA)**: ⚠️ **MONITORAR** - Risco elevado
+- **❌ Score <0.6 (BAIXA)**: ❌ **IGNORAR** - Confiança insuficiente
+
+## CONFIGURAÇÃO DE PRODUÇÃO:
+- **Portfolio**: AAPL, MSFT, GOOGL, TSLA, NVDA, META, AMZN + EURUSD=X, GBPUSD=X, USDJPY=X, USDCAD=X, USDCHF=X
+- **Intervalo**: 15 minutos entre execuções
+- **Modo**: PRODUÇÃO (dados reais de mercado)
+- **Alertas**: Automáticos habilitados
+
+## CARACTERÍSTICAS DO MODO PRODUÇÃO:
+- ✅ Análise de ações + FOREX simultaneamente
+- ✅ Detecção de oportunidades em tempo real
+- ✅ Sistema de pontuação de confiança
+- ✅ Recomendações de execução baseadas em risco/recompensa
+- ✅ Salvamento automático de dados e métricas
+
+## TEMPO ESPERADO: <30 segundos
+## FREQUÊNCIA RECOMENDADA: A cada 15 minutos durante sessão de mercado
+
+## EXEMPLO DE SAÍDA ESPERADA:
+```
+🚀 PROTOCOLO DE ACIONAMENTO - MODO PRODUÇÃO
+============================================================
+📋 Carregando configuração: config_producao.json
+📊 Portfolio de produção: 12 ativos
+   🏢 Ações: 7
+   💱 FOREX: 5
+
+🔧 Inicializando motor de produção...
+
+🔄 EXECUTANDO ANÁLISE DE PRODUÇÃO...
+
+📈 RESULTADO DA ANÁLISE DE PRODUÇÃO:
+🎯 Oportunidades encontradas: 2
+
+🎯 OPORTUNIDADES DETECTADAS (PRODUÇÃO):
+   1. 🔥 EUR/USD: entrada_suporte
+      📊 Score: 0.85 (MUITO_ALTA)
+      🎯 Risco/Recompensa: 2.3
+      💰 EXECUTAR - Alto potencial de ganho
+
+   2. ✅ GBP/JPY: entrada_resistencia
+      📊 Score: 0.72 (ALTA)
+      🎯 Risco/Recompensa: 1.8
+      📈 CONSIDERAR - Potencial moderado
+
+⚙️ Status geral: concluido_com_sucesso
+
+📋 Etapas executadas:
+   ✅ Avaliacao Assertividade: concluida
+   ✅ Analise Macro: concluida
+   ✅ Identificacao Oportunidades: concluida
+   ✅ Analise Niveis: concluida
+
+✅ SISTEMA OPERACIONAL EM MODO PRODUÇÃO
+🔄 Pronto para próximo ciclo em 15 minutos
+📊 Dados salvos automaticamente
+```
+
+---
+**Status**: ✅ TOTALMENTE OPERACIONAL
+**Última Atualização**: 7 de novembro de 2025
+**Versão**: 2.0 - Modo Produção</content>
+<parameter name="filePath">c:\repo\projetos\agent-especialista-mercado-financeiro\backend\PROTOCOLO_PRODUCAO.md

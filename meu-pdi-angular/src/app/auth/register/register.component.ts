@@ -52,9 +52,15 @@ export class RegisterComponent implements OnInit {
       this.isLoading = true;
       this.errorMessage = '';
 
-      const { name, email, password } = this.registerForm.value;
+      const { name, email, password, confirmPassword, acceptTerms } = this.registerForm.value;
 
-      this.authService.register({ name, email, password }).subscribe({
+      this.authService.register({
+        nome_completo: name,
+        email,
+        senha: password,
+        confirmar_senha: confirmPassword,
+        aceitar_termos: acceptTerms
+      }).subscribe({
         next: (response) => {
           this.isLoading = false;
           // TASK-ARCH002: Migrar Componentes Core Auth - Registro implementado
@@ -62,7 +68,7 @@ export class RegisterComponent implements OnInit {
         },
         error: (error) => {
           this.isLoading = false;
-          this.errorMessage = error.error?.message || 'Erro ao criar conta. Tente novamente.';
+          this.errorMessage = error.error?.detail || error.error?.message || 'Erro ao criar conta. Tente novamente.';
         }
       });
     } else {

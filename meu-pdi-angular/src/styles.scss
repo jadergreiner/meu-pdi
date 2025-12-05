@@ -1,1 +1,52 @@
-/* You can add global styles to this file, and also import other style files */
+/* Tema Angular Material - Indigo Pink */
+@use '@angular/material' as mat;
+
+/* Core styles que dependem do tema */
+@include mat.core();
+
+/* Tema customizado meu-pdi */
+$meu-pdi-primary: mat.m2-define-palette(mat.$m2-indigo-palette);
+$meu-pdi-accent: mat.m2-define-palette(mat.$m2-pink-palette, A200, A100, A400);
+$meu-pdi-warn: mat.m2-define-palette(mat.$m2-red-palette);
+
+$meu-pdi-theme: mat.m2-define-light-theme((
+  color: (
+    primary: $meu-pdi-primary,
+    accent: $meu-pdi-accent,
+    warn: $meu-pdi-warn,
+  ),
+  typography: mat.m2-define-typography-config(),
+  density: 0,
+));
+
+@include mat.all-component-themes($meu-pdi-theme);
+
+/* Estilos globais */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #f5f5f5;
+}
+
+/* Utility classes */
+.mat-typography {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* Form field full width */
+.full-width {
+  width: 100%;
+}
+
+/* Container centralizado */
+.centered-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}

@@ -1,0 +1,135 @@
+<!-- Loading State -->
+<div *ngIf="isLoading()" class="loading-container">
+  <div class="loading-spinner">
+    <mat-spinner diameter="40" color="primary"></mat-spinner>
+    <p class="loading-text">Carregando estatísticas...</p>
+  </div>
+</div>
+
+<!-- Error State -->
+<div *ngIf="error() && !isLoading()" class="error-container">
+  <div class="error-content">
+    <mat-icon class="error-icon">error_outline</mat-icon>
+    <h3 class="error-title">Erro ao carregar estatísticas</h3>
+    <p class="error-message">{{ error() }}</p>
+    <button mat-stroked-button color="primary" (click)="onRetry()">
+      <mat-icon>refresh</mat-icon>
+      Tentar Novamente
+    </button>
+  </div>
+</div>
+
+<!-- Statistics Cards -->
+<div *ngIf="!isLoading() && !error() && statistics()" class="statistics-container">
+  <!-- Header -->
+  <div class="statistics-header">
+    <h2 class="statistics-title">Suas Estatísticas</h2>
+    <div class="engagement-badge" [ngClass]="engagementColor()">
+      <mat-icon class="engagement-icon">{{ engagementIcon() }}</mat-icon>
+      <span class="engagement-text">
+        Engajamento {{ statistics()!.nivel_engajamento | titlecase }}
+      </span>
+    </div>
+  </div>
+
+  <!-- Statistics Grid -->
+  <div class="statistics-grid">
+    <!-- Dias Ativos -->
+    <mat-card class="stat-card">
+      <mat-card-content class="stat-content">
+        <div class="stat-icon">
+          <mat-icon color="primary">calendar_today</mat-icon>
+        </div>
+        <div class="stat-info">
+          <div class="stat-value">{{ statistics()!.dias_ativos }}</div>
+          <div class="stat-label">Dias Ativos</div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Objetivos Completados -->
+    <mat-card class="stat-card">
+      <mat-card-content class="stat-content">
+        <div class="stat-icon">
+          <mat-icon color="accent">check_circle</mat-icon>
+        </div>
+        <div class="stat-info">
+          <div class="stat-value">{{ statistics()!.objetivos_completados }}</div>
+          <div class="stat-label">Objetivos Completados</div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Progresso Mensal -->
+    <mat-card class="stat-card">
+      <mat-card-content class="stat-content">
+        <div class="stat-icon">
+          <mat-icon color="warn">trending_up</mat-icon>
+        </div>
+        <div class="stat-info">
+          <div class="stat-value">{{ statistics()!.progresso_mensal.toFixed(1) }}%</div>
+          <div class="stat-label">Progresso Mensal</div>
+          <mat-progress-bar
+            mode="determinate"
+            [value]="statistics()!.progresso_mensal"
+            class="progress-mini">
+          </mat-progress-bar>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Sessões Realizadas -->
+    <mat-card class="stat-card">
+      <mat-card-content class="stat-content">
+        <div class="stat-icon">
+          <mat-icon color="primary">group</mat-icon>
+        </div>
+        <div class="stat-info">
+          <div class="stat-value">{{ statistics()!.sessoes_realizadas }}</div>
+          <div class="stat-label">Sessões Realizadas</div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Horas Dedicadas -->
+    <mat-card class="stat-card">
+      <mat-card-content class="stat-content">
+        <div class="stat-icon">
+          <mat-icon color="accent">schedule</mat-icon>
+        </div>
+        <div class="stat-info">
+          <div class="stat-value">{{ statistics()!.horas_dedicadas.toFixed(1) }}h</div>
+          <div class="stat-label">Horas Dedicadas</div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Streak Atual -->
+    <mat-card class="stat-card">
+      <mat-card-content class="stat-content">
+        <div class="stat-icon">
+          <mat-icon color="warn">local_fire_department</mat-icon>
+        </div>
+        <div class="stat-info">
+          <div class="stat-value">{{ statistics()!.streak_atual }}</div>
+          <div class="stat-label">Dias de Streak</div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Última Atividade -->
+  <div class="last-activity">
+    <mat-icon class="activity-icon">access_time</mat-icon>
+    <span class="activity-text">
+      Última atividade: {{ statistics()!.ultima_atividade | date:'dd/MM/yyyy HH:mm' }}
+    </span>
+  </div>
+</div>
+
+<!-- Empty State -->
+<div *ngIf="!isLoading() && !error() && !statistics()" class="empty-state">
+  <mat-icon class="empty-icon">bar_chart</mat-icon>
+  <h3 class="empty-title">Estatísticas não disponíveis</h3>
+  <p class="empty-message">Suas estatísticas aparecerão aqui assim que você começar sua jornada.</p>
+</div>

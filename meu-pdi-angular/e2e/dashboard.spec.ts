@@ -8,6 +8,58 @@ test.describe('Dashboard', () => {
     await page.addInitScript(() => {
       localStorage.setItem('auth_token', 'mock-jwt-token-for-testing');
     });
+
+    // Mock das APIs do dashboard necessárias para todos os testes
+    await page.route('**/api/profile', async route => {
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({
+          id: '1',
+          nome_completo: 'João Silva',
+          email: 'joao@teste.com',
+          email_validado: true,
+          data_cadastro: '2025-01-01'
+        })
+      });
+    });
+
+    await page.route('**/api/pdi/overview', async route => {
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({
+          status_geral: 'em_andamento',
+          objetivos_ativos: 3,
+          progresso_percentual: 65.5,
+          proximas_acoes: ['Revisar objetivos', 'Agendar mentoria', 'Atualizar PDI'],
+          ultima_atualizacao: '2025-01-03'
+        })
+      });
+    });
+
+    await page.route('**/api/next-steps', async route => {
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({
+          acoes_recomendadas: [
+            {
+              titulo: 'Agendar Sessão de Mentoria',
+              descricao: 'Próxima sessão disponível em 2 dias',
+              prioridade: 'alta',
+              url: '/sessions/schedule'
+            },
+            {
+              titulo: 'Atualizar PDI',
+              descricao: 'Revisar objetivos do trimestre',
+              prioridade: 'media',
+              url: '/pdi/update'
+            }
+          ]
+        })
+      });
+    });
   });
 
   test('deve carregar o dashboard após autenticação', async ({ page }) => {
@@ -40,58 +92,6 @@ test.describe('Dashboard', () => {
   });
 
   test('deve mostrar dados do PDI quando carregados', async ({ page }) => {
-    // Mock das APIs do dashboard
-    await page.route('**/api/profile', async route => {
-      await route.fulfill({
-        status: 200,
-        contentType: 'application/json',
-        body: JSON.stringify({
-          id: '1',
-          nome_completo: 'João Silva',
-          email: 'joao@teste.com',
-          email_validado: true,
-          data_cadastro: '2025-01-01'
-        })
-      });
-    });
-
-    await page.route('**/api/pdi/overview', async route => {
-      await route.fulfill({
-        status: 200,
-        contentType: 'application/json',
-        body: JSON.stringify({
-          status_geral: 'em_andamento',
-          objetivos_ativos: 3,
-          progresso_percentual: 65.5,
-          proximas_acoes: ['Revisar objetivos', 'Agendar mentoria', 'Atualizar PDI'],
-          ultima_atualizacao: '2025-11-03'
-        })
-      });
-    });
-
-    await page.route('**/api/next-steps', async route => {
-      await route.fulfill({
-        status: 200,
-        contentType: 'application/json',
-        body: JSON.stringify({
-          acoes_recomendadas: [
-            {
-              titulo: 'Agendar Sessão de Mentoria',
-              descricao: 'Próxima sessão disponível em 2 dias',
-              prioridade: 'alta',
-              url: '/sessions/schedule'
-            },
-            {
-              titulo: 'Atualizar PDI',
-              descricao: 'Revisar objetivos do trimestre',
-              prioridade: 'media',
-              url: '/pdi/update'
-            }
-          ]
-        })
-      });
-    });
-
     await page.goto('/dashboard');
 
     // Aguardar carregamento

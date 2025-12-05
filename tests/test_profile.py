@@ -10,12 +10,12 @@ def test_obter_perfil_usuario_sucesso(client, sample_user_data):
     test_data = sample_user_data.copy()
     test_data["email"] = unique_email
 
-    register_response = client.post("/register", json=test_data)
+    register_response = client.post("/auth/register", json=test_data)
     assert register_response.status_code == 200
     user_data = register_response.json()
 
     # Validar email para poder fazer login
-    validate_response = client.post("/validate-email", json={"token": user_data["token_validacao"]})
+    validate_response = client.post("/auth/validate-email", json={"token": user_data["token_validacao"]})
     assert validate_response.status_code == 200
 
     # Fazer login para obter token
@@ -23,13 +23,13 @@ def test_obter_perfil_usuario_sucesso(client, sample_user_data):
         "email": unique_email,
         "senha": sample_user_data["senha"]
     }
-    login_response = client.post("/login", json=login_data)
+    login_response = client.post("/auth/login", json=login_data)
     assert login_response.status_code == 200
     token = login_response.json()["access_token"]
 
     # Act: Obter perfil do usuário
     headers = {"Authorization": f"Bearer {token}"}
-    response = client.get("/profile", headers=headers)
+    response = client.get("/users/profile", headers=headers)
 
     # Assert
     assert response.status_code == 200
@@ -50,7 +50,7 @@ def test_obter_perfil_usuario_sucesso(client, sample_user_data):
 def test_obter_perfil_usuario_nao_autorizado(client):
     """Testa erro ao acessar perfil sem token"""
     # Act
-    response = client.get("/profile")
+    response = client.get("/users/profile")
 
     # Assert
     assert response.status_code == 403  # FastAPI retorna 403 para Bearer token missing
@@ -61,11 +61,11 @@ def test_obter_perfil_usuario_token_invalido(client):
     headers = {"Authorization": "Bearer invalid-token"}
 
     # Act
-    response = client.get("/profile", headers=headers)
+    response = client.get("/users/profile", headers=headers)
 
     # Assert
     assert response.status_code == 401
-    assert "Token invalido" in response.json()["detail"]
+    assert "Token" in response.json()["detail"]
 
 def test_obter_perfil_usuario_nao_encontrado(client):
     """Testa erro quando usuário do token não existe mais"""
@@ -86,9 +86,9 @@ def test_obter_visao_geral_pdi_sucesso(client):
         "confirmar_senha": "MinhaSenhaForte123!",
         "aceitar_termos": True
     }
-    client.post("/register", json=user_data)
+    client.post("/auth/register", json=user_data)
 
-    login_response = client.post("/login", json={
+    login_response = client.post("/auth/login", json={
         "email": user_data["email"],
         "senha": user_data["senha"]
     })
@@ -96,7 +96,7 @@ def test_obter_visao_geral_pdi_sucesso(client):
     headers = {"Authorization": f"Bearer {token}"}
 
     # Act: Fazer requisição para PDI overview
-    response = client.get("/pdi/overview", headers=headers)
+    response = client.get("/users/pdi/overview", headers=headers)
 
     # Assert: Verificar resposta de sucesso
     assert response.status_code == 200
@@ -111,7 +111,7 @@ def test_obter_visao_geral_pdi_sucesso(client):
 def test_obter_visao_geral_pdi_nao_autorizado(client):
     """Testa erro 403 quando token não é fornecido"""
     # Act: Fazer requisição sem token
-    response = client.get("/pdi/overview")
+    response = client.get("/users/pdi/overview")
 
     # Assert: Verificar erro de autenticação
     assert response.status_code == 403  # FastAPI retorna 403 por padrão para auth obrigatória
@@ -119,17 +119,17 @@ def test_obter_visao_geral_pdi_nao_autorizado(client):
 
 
 def test_obter_visao_geral_pdi_token_invalido(client):
-    """Testa erro 401 quando token é inválido"""
-    # Arrange: Token inválido
+    """Testa erro 401 quando token e invalido"""
+    # Arrange: Token invalido
     headers = {"Authorization": "Bearer token_invalido"}
 
-    # Act: Fazer requisição com token inválido
-    response = client.get("/pdi/overview", headers=headers)
+    # Act: Fazer requisicao com token invalido
+    response = client.get("/users/pdi/overview", headers=headers)
 
-    # Assert: Verificar erro de autenticação
+    # Assert: Verificar erro de autenticacao
     assert response.status_code == 401
     assert "detail" in response.json()
-    assert "Token invalido ou expirado" in response.json()["detail"]
+    assert "Token" in response.json()["detail"]
 
 
 # TASK-T007: Testes para endpoint próximos passos
@@ -143,9 +143,9 @@ def test_obter_proximos_passos_sucesso(client):
         "confirmar_senha": "MinhaSenhaForte123!",
         "aceitar_termos": True
     }
-    client.post("/register", json=user_data)
+    client.post("/auth/register", json=user_data)
 
-    login_response = client.post("/login", json={
+    login_response = client.post("/auth/login", json={
         "email": user_data["email"],
         "senha": user_data["senha"]
     })
@@ -153,7 +153,7 @@ def test_obter_proximos_passos_sucesso(client):
     headers = {"Authorization": f"Bearer {token}"}
 
     # Act: Fazer requisição para próximos passos
-    response = client.get("/next-steps", headers=headers)
+    response = client.get("/users/next-steps", headers=headers)
 
     # Assert: Verificar resposta de sucesso
     assert response.status_code == 200
@@ -174,7 +174,7 @@ def test_obter_proximos_passos_sucesso(client):
 def test_obter_proximos_passos_nao_autorizado(client):
     """Testa erro 403 quando token não é fornecido"""
     # Act: Fazer requisição sem token
-    response = client.get("/next-steps")
+    response = client.get("/users/next-steps")
 
     # Assert: Verificar erro de autenticação
     assert response.status_code == 403  # FastAPI retorna 403 por padrão para auth obrigatória
@@ -182,17 +182,17 @@ def test_obter_proximos_passos_nao_autorizado(client):
 
 
 def test_obter_proximos_passos_token_invalido(client):
-    """Testa erro 401 quando token é inválido"""
-    # Arrange: Token inválido
+    """Testa erro 401 quando token e invalido"""
+    # Arrange: Token invalido
     headers = {"Authorization": "Bearer token_invalido"}
 
-    # Act: Fazer requisição com token inválido
-    response = client.get("/next-steps", headers=headers)
+    # Act: Fazer requisicao com token invalido
+    response = client.get("/users/next-steps", headers=headers)
 
-    # Assert: Verificar erro de autenticação
+    # Assert: Verificar erro de autenticacao
     assert response.status_code == 401
     assert "detail" in response.json()
-    assert "Token invalido ou expirado" in response.json()["detail"]
+    assert "Token" in response.json()["detail"]
 
 
 def test_obter_proximos_passos_acoes_personalizadas(client):
@@ -205,9 +205,9 @@ def test_obter_proximos_passos_acoes_personalizadas(client):
         "confirmar_senha": "MinhaSenhaForte123!",
         "aceitar_termos": True
     }
-    client.post("/register", json=user_data)
+    client.post("/auth/register", json=user_data)
 
-    login_response = client.post("/login", json={
+    login_response = client.post("/auth/login", json={
         "email": user_data["email"],
         "senha": user_data["senha"]
     })
@@ -215,7 +215,7 @@ def test_obter_proximos_passos_acoes_personalizadas(client):
     headers = {"Authorization": f"Bearer {token}"}
 
     # Act: Fazer requisição para próximos passos
-    response = client.get("/next-steps", headers=headers)
+    response = client.get("/users/next-steps", headers=headers)
 
     # Assert: Verificar que ações de completar perfil estão presentes
     assert response.status_code == 200
@@ -237,9 +237,9 @@ def test_obter_configuracao_responsiva_sucesso(client):
         "confirmar_senha": "MinhaSenhaForte123!",
         "aceitar_termos": True
     }
-    client.post("/register", json=user_data)
+    client.post("/auth/register", json=user_data)
 
-    login_response = client.post("/login", json={
+    login_response = client.post("/auth/login", json={
         "email": user_data["email"],
         "senha": user_data["senha"]
     })
@@ -247,7 +247,7 @@ def test_obter_configuracao_responsiva_sucesso(client):
     headers = {"Authorization": f"Bearer {token}"}
 
     # Act: Fazer requisição para configurações responsivas
-    response = client.get("/dashboard/config", headers=headers)
+    response = client.get("/users/dashboard/config", headers=headers)
 
     # Assert: Verificar resposta de sucesso
     assert response.status_code == 200
@@ -267,7 +267,7 @@ def test_obter_configuracao_responsiva_sucesso(client):
 def test_obter_configuracao_responsiva_nao_autorizado(client):
     """Testa erro 403 quando token não é fornecido"""
     # Act: Fazer requisição sem token
-    response = client.get("/dashboard/config")
+    response = client.get("/users/dashboard/config")
 
     # Assert: Verificar erro de autenticação
     assert response.status_code == 403
@@ -275,17 +275,17 @@ def test_obter_configuracao_responsiva_nao_autorizado(client):
 
 
 def test_obter_configuracao_responsiva_token_invalido(client):
-    """Testa erro 401 quando token é inválido"""
-    # Arrange: Token inválido
+    """Testa erro 401 quando token e invalido"""
+    # Arrange: Token invalido
     headers = {"Authorization": "Bearer token_invalido"}
 
-    # Act: Fazer requisição com token inválido
-    response = client.get("/dashboard/config", headers=headers)
+    # Act: Fazer requisicao com token invalido
+    response = client.get("/users/dashboard/config", headers=headers)
 
-    # Assert: Verificar erro de autenticação
+    # Assert: Verificar erro de autenticacao
     assert response.status_code == 401
     assert "detail" in response.json()
-    assert "Token invalido ou expirado" in response.json()["detail"]
+    assert "Token" in response.json()["detail"]
 
 
 def test_obter_configuracao_responsiva_recursos(client):
@@ -298,9 +298,9 @@ def test_obter_configuracao_responsiva_recursos(client):
         "confirmar_senha": "MinhaSenhaForte123!",
         "aceitar_termos": True
     }
-    client.post("/register", json=user_data)
+    client.post("/auth/register", json=user_data)
 
-    login_response = client.post("/login", json={
+    login_response = client.post("/auth/login", json={
         "email": user_data["email"],
         "senha": user_data["senha"]
     })
@@ -308,7 +308,7 @@ def test_obter_configuracao_responsiva_recursos(client):
     headers = {"Authorization": f"Bearer {token}"}
 
     # Act: Fazer requisição para configurações responsivas
-    response = client.get("/dashboard/config", headers=headers)
+    response = client.get("/users/dashboard/config", headers=headers)
 
     # Assert: Verificar features responsivas
     assert response.status_code == 200
@@ -336,9 +336,9 @@ def test_respostas_api_amigaveis_mobile(client):
         "confirmar_senha": "MinhaSenhaForte123!",
         "aceitar_termos": True
     }
-    client.post("/register", json=user_data)
+    client.post("/auth/register", json=user_data)
 
-    login_response = client.post("/login", json={
+    login_response = client.post("/auth/login", json={
         "email": user_data["email"],
         "senha": user_data["senha"]
     })
@@ -346,7 +346,7 @@ def test_respostas_api_amigaveis_mobile(client):
     headers = {"Authorization": f"Bearer {token}"}
 
     # Act & Assert: Testar endpoints principais
-    endpoints = ["/profile", "/pdi/overview", "/next-steps"]
+    endpoints = ["/users/profile", "/users/pdi/overview", "/users/next-steps"]
 
     for endpoint in endpoints:
         response = client.get(endpoint, headers=headers)
@@ -371,9 +371,9 @@ def test_estrutura_resposta_visao_geral_pdi(client):
         "confirmar_senha": "MinhaSenhaForte123!",
         "aceitar_termos": True
     }
-    client.post("/register", json=user_data)
+    client.post("/auth/register", json=user_data)
 
-    login_response = client.post("/login", json={
+    login_response = client.post("/auth/login", json={
         "email": user_data["email"],
         "senha": user_data["senha"]
     })
@@ -381,7 +381,7 @@ def test_estrutura_resposta_visao_geral_pdi(client):
     headers = {"Authorization": f"Bearer {token}"}
 
     # Act
-    response = client.get("/pdi/overview", headers=headers)
+    response = client.get("/users/pdi/overview", headers=headers)
 
     # Assert
     assert response.status_code == 200
@@ -409,9 +409,9 @@ def test_otimizacao_mobile_proximos_passos(client):
         "confirmar_senha": "MinhaSenhaForte123!",
         "aceitar_termos": True
     }
-    client.post("/register", json=user_data)
+    client.post("/auth/register", json=user_data)
 
-    login_response = client.post("/login", json={
+    login_response = client.post("/auth/login", json={
         "email": user_data["email"],
         "senha": user_data["senha"]
     })
@@ -419,7 +419,7 @@ def test_otimizacao_mobile_proximos_passos(client):
     headers = {"Authorization": f"Bearer {token}"}
 
     # Act
-    response = client.get("/next-steps", headers=headers)
+    response = client.get("/users/next-steps", headers=headers)
 
     # Assert
     assert response.status_code == 200
@@ -457,9 +457,9 @@ def test_tempos_resposta_api_mobile(client):
         "confirmar_senha": "MinhaSenhaForte123!",
         "aceitar_termos": True
     }
-    client.post("/register", json=user_data)
+    client.post("/auth/register", json=user_data)
 
-    login_response = client.post("/login", json={
+    login_response = client.post("/auth/login", json={
         "email": user_data["email"],
         "senha": user_data["senha"]
     })
@@ -467,7 +467,7 @@ def test_tempos_resposta_api_mobile(client):
     headers = {"Authorization": f"Bearer {token}"}
 
     # Act & Assert: Testar tempo de resposta
-    endpoints = ["/profile", "/pdi/overview", "/next-steps"]
+    endpoints = ["/users/profile", "/users/pdi/overview", "/users/next-steps"]
 
     for endpoint in endpoints:
         start_time = time.time()

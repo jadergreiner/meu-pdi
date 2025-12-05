@@ -58,13 +58,14 @@ Documento unificado consolidando todas as decisões arquiteturais da plataforma 
 
 ## 🏛️ Arquitetura Técnica Atual
 
-### **Frontend (MVP)**
+### **Frontend (Angular Enterprise)**
 ```
-Next.js 14 + TypeScript + Tailwind CSS
-├── App Router (File-based routing)
-├── Server Components + Client Components
-├── API Routes (Next.js API)
-├── Responsive Design (Mobile-first)
+Angular 18 + TypeScript + Angular Material
+├── Standalone Components + Signals
+├── Server-Side Rendering (SSR)
+├── Lazy Loading Modules
+├── Reactive Forms + RxJS
+├── E2E Testing (Playwright)
 └── Componentes: Auth (Login/Register) + Dashboard
 ```
 
@@ -248,7 +249,48 @@ Azure/AWS Cloud Stack
 
 ---
 
-## 📚 Referências e Documentação
+## � APIs Implementadas (FastAPI Backend)
+
+### **Autenticação (`/auth`)**
+```
+POST /auth/register          # Registro de novos usuários
+POST /auth/login             # Login com JWT
+POST /auth/refresh           # Renovação de tokens
+POST /auth/validate-email    # Validação de email
+POST /auth/reset-password    # Solicitação de reset
+POST /auth/confirm-reset     # Confirmação de reset
+```
+
+### **Usuários (`/users`)**
+```
+GET  /users/profile          # Perfil completo do usuário
+GET  /users/pdi/overview     # Visão geral do PDI
+GET  /users/next-steps       # Próximas ações recomendadas
+GET  /users/statistics       # Estatísticas e métricas do usuário
+GET  /users/dashboard/config # Configurações responsivas do dashboard
+```
+
+### **Esquemas de Dados (Pydantic)**
+```python
+# Autenticação
+UserRegister, LoginRequest, TokenResponse, RefreshTokenRequest
+
+# Usuários
+UserProfile, PDIOverview, NextSteps, UserStatistics, ResponsiveConfig
+
+# Validações
+EmailStr, Field constraints, Custom validators
+```
+
+### **Recursos Técnicos**
+- **Framework:** FastAPI 0.104+ com async/await
+- **Autenticação:** Authlib com JWT/JWS/JWE (HS256 + RS256)
+- **Validação:** Pydantic v2 com schemas rigorosos
+- **Banco:** In-memory (MVP) → PostgreSQL (produção)
+- **Documentação:** OpenAPI/Swagger automática
+- **Testes:** pytest + Playwright E2E
+
+---
 
 ### **ADRs Aprovados**
 - [ADR-001: Arquitetura No-Code First](adrs/ADR-001-arquitetura-no-code-first.md)

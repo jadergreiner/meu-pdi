@@ -68,28 +68,28 @@
         </div>
 
         <div class="content">
-            <h2>Olá {{invitee_first_name}},</h2>
+            <h2>Olá {{payload__invitee__first_name}},</h2>
 
             <p>Estamos muito felizes com seu agendamento! Sua sessão de PDI foi confirmada e estamos preparados para apoiá-lo nessa importante jornada de desenvolvimento pessoal.</p>
 
             <div class="details-box">
                 <h3>📅 Detalhes da Sessão</h3>
                 <ul>
-                    <li><strong>Data e Horário:</strong> <span class="highlight">{{start_time}}</span></li>
-                    <li><strong>Duração:</strong> {{event_duration}} minutos</li>
-                    <li><strong>Tipo de Sessão:</strong> {{event_name}}</li>
+                    <li><strong>Data e Horário:</strong> <span class="highlight">{{payload__start_time}}</span></li>
+                    <li><strong>Duração:</strong> {{payload__event_type__duration}} minutos</li>
+                    <li><strong>Tipo de Sessão:</strong> {{payload__event_type__name}}</li>
                     <li><strong>Formato:</strong> Online via Zoom</li>
                 </ul>
             </div>
 
             <h3>🎯 Seus Objetivos</h3>
-            <p>{{objective_response}}</p>
+            <p>{{payload__questions_and_responses__1_response}}</p>
 
             <h3>🔗 Links Importantes</h3>
             <p>
                 <a href="{{zoom_link}}" class="button">Acessar Reunião Zoom</a>
-                <a href="{{reschedule_url}}" class="button button-secondary">Reagendar</a>
-                <a href="{{cancel_url}}" class="button button-secondary">Cancelar</a>
+                <a href="{{payload__reschedule_url}}" class="button button-secondary">Reagendar</a>
+                <a href="{{payload__cancel_url}}" class="button button-secondary">Cancelar</a>
             </p>
 
             <h3>📋 O que Esperar da Sessão</h3>

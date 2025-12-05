@@ -70,3 +70,6 @@ htmlcov/
 *.zip
 *.tar.gz
 *.7z
+config/payments.env
+*.env
+!.env.example

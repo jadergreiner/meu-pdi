@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: meu-pdi-postgres
+    environment:
+      POSTGRES_DB: meu_pdi_dev
+      POSTGRES_USER: meu_pdi_user
+      POSTGRES_PASSWORD: meu_pdi_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U meu_pdi_user -d meu_pdi_dev"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - meu-pdi-network
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: meu-pdi-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - meu-pdi-network
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  meu-pdi-network:
+    driver: bridge

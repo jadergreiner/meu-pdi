@@ -197,7 +197,7 @@ Recorrência do mesmo bug de encoding. Arquivo foi recriado usando comando echo 
 ### 🔧 Investigação
 
 **Causa Identificada:** Validação de formulário Angular não está funcionando corretamente no contexto E2E. O validador `passwordMatchValidator` não está sendo acionado ou a mensagem de erro não está sendo exibida.
-**Arquivos Afetados:** 
+**Arquivos Afetados:**
 - `src/app/auth/register/register.component.ts` (lógica de validação)
 - `src/app/auth/register/register.component.html` (exibição da mensagem de erro)
 - `e2e/auth.spec.ts` (teste que identifica o problema)
